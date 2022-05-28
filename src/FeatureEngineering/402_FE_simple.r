@@ -10,7 +10,7 @@ rm( list=ls() )
 gc()
 
 require("data.table")
-
+require("stringr")
 
 
 EnriquecerDataset  <- function( dataset , arch_destino )
@@ -36,12 +36,12 @@ EnriquecerDataset  <- function( dataset , arch_destino )
   dataset[ , mv_status04 := ifelse( is.na(Master_status), 10, Master_status)  +  ifelse( is.na(Visa_status), 10, Visa_status)  ]
   dataset[ , mv_status05 := ifelse( is.na(Master_status), 10, Master_status)  +  100*ifelse( is.na(Visa_status), 10, Visa_status)  ]
 
-  dataset[ , mv_status06 := ifelse( is.na(Visa_status), 
-                                    ifelse( is.na(Master_status), 10, Master_status), 
+  dataset[ , mv_status06 := ifelse( is.na(Visa_status),
+                                    ifelse( is.na(Master_status), 10, Master_status),
                                     Visa_status) ]
 
-  dataset[ , mv_status07 := ifelse( is.na(Master_status), 
-                                    ifelse( is.na(Visa_status), 10, Visa_status), 
+  dataset[ , mv_status07 := ifelse( is.na(Master_status),
+                                    ifelse( is.na(Visa_status), 10, Visa_status),
                                     Master_status) ]
 
 
@@ -92,7 +92,7 @@ EnriquecerDataset  <- function( dataset , arch_destino )
   #paso los infinitos a NULOS
   infinitos      <- lapply( names(dataset),
                             function(.name) dataset[ , sum(is.infinite( get(.name) )) ]  )
-  
+
   infinitos_qty  <- sum( unlist( infinitos ) )
   if( infinitos_qty > 0 )
   {
@@ -106,13 +106,13 @@ EnriquecerDataset  <- function( dataset , arch_destino )
   #se invita a asignar un valor razonable segun la semantica del campo creado
   nans      <- lapply( names(dataset),
                        function(.name) dataset[ , sum( is.nan( get(.name) )) ] )
-  
+
   nans_qty  <- sum( unlist( nans) )
   if( nans_qty > 0 )
   {
     cat( "ATENCION, hay", nans_qty, "valores NaN 0/0 en tu dataset. Seran pasados arbitrariamente a 0\n" )
     cat( "Si no te gusta la decision, modifica a gusto el script!\n\n")
-    dataset[mapply(is.nan, dataset)] <- 0
+    dataset[mapply(is.nan, dataset)] <- NA
   }
 
   #FIN de la seccion donde se deben hacer cambios con variables nuevas
@@ -123,25 +123,267 @@ EnriquecerDataset  <- function( dataset , arch_destino )
           sep= "," )
 
 }
-#------------------------------------------------------------------------------
+
+
+#################MI FUNCION ########################
+
+
+
+fuerzaBruta  <- function( dataset3 , resultados )
+{
+  
+  datasetFinal=dataset3
+  
+  varName='div'
+  auxdf=NULL
+  
+  
+  ### Operacion division
+  
+  for (i in 1:length(resultados$feature))
+  {
+    
+    for(j in 1:length(resultados$feature))
+    {
+      
+      if(resultados$feature[i]==resultados$feature[j])
+        next
+      
+      nombre=str_replace_all(paste(varName,resultados$feature[i],resultados$feature[j])," ","_")
+      valor=dataset3[,resultados$feature[i]]/dataset3[,resultados$feature[j]]
+      nombre=gsub(" ","",nombre)
+      
+      auxdf = data.frame(valor)
+      colnames(auxdf)=nombre
+      
+      datasetFinal=cbind(datasetFinal,auxdf)
+      
+      auxdf=NULL
+      
+    }
+    
+  }
+  
+  
+  
+  ### Operacion multiplicacion
+  
+  varName='mul'
+  auxdf=NULL
+  
+  
+  
+  for (i in 1:length(resultados$feature))
+  {
+    
+    for(j in 1:length(resultados$feature))
+    {
+      
+      if(resultados$feature[i]==resultados$feature[j])
+        next
+      
+      nombre=str_replace_all(paste(varName,resultados$feature[i],resultados$feature[j])," ","_")
+      valor=dataset3[,resultados$feature[i]]*dataset3[,resultados$feature[j]]
+      nombre=gsub(" ","",nombre)
+      
+      auxdf = data.frame(valor)
+      colnames(auxdf)=nombre
+      
+      datasetFinal=cbind(datasetFinal,auxdf)
+      
+      auxdf=NULL
+      
+    }
+    
+  }
+  
+  
+  
+  ### Operacion maximo
+  
+  varName='max'
+  auxdf=NULL
+  
+  
+  
+  for (i in 1:length(resultados$feature))
+  {
+    
+    for(j in 1:length(resultados$feature))
+    {
+      
+      if(resultados$feature[i]==resultados$feature[j])
+        next
+      
+      nombre=str_replace_all(paste(varName,resultados$feature[i],resultados$feature[j])," ","_")
+      valor=pmax( dataset3[,resultados$feature[i]],dataset3[,resultados$feature[j]], na.rm = TRUE)
+      nombre=gsub(" ","",nombre)
+      
+      auxdf = data.frame(valor)
+      colnames(auxdf)=nombre
+      
+      datasetFinal=cbind(datasetFinal,auxdf)
+      
+      auxdf=NULL
+      
+    }
+    
+  }
+  
+  ### Operacion minimo
+  
+  varName='min'
+  auxdf=NULL
+  
+  
+  
+  for (i in 1:length(resultados$feature))
+  {
+    
+    for(j in 1:length(resultados$feature))
+    {
+      
+      if(resultados$feature[i]==resultados$feature[j])
+        next
+      
+      nombre=str_replace_all(paste(varName,resultados$feature[i],resultados$feature[j])," ","_")
+      valor=pmin( dataset3[,resultados$feature[i]],dataset3[,resultados$feature[j]], na.rm = TRUE)
+      nombre=gsub(" ","",nombre)
+      
+      auxdf = data.frame(valor)
+      colnames(auxdf)=nombre
+      
+      datasetFinal=cbind(datasetFinal,auxdf)
+      
+      auxdf=NULL
+      
+    }
+    
+  }
+  
+  
+  
+  
+  ### Operacion suma
+  
+  varName='suma'
+  auxdf=NULL
+  
+  
+  
+  for (i in 1:length(resultados$feature))
+  {
+    
+    for(j in 1:length(resultados$feature))
+    {
+      
+      if(resultados$feature[i]==resultados$feature[j])
+        next
+      
+      nombre=str_replace_all(paste(varName,resultados$feature[i],resultados$feature[j])," ","_")
+      valor=dataset3[,resultados$feature[i]]+dataset3[,resultados$feature[j]]
+      nombre=gsub(" ","",nombre)
+      
+      auxdf = data.frame(valor)
+      colnames(auxdf)=nombre
+      
+      datasetFinal=cbind(datasetFinal,auxdf)
+      
+      auxdf=NULL
+      
+    }
+  }
+  
+  ### Operacion resta
+  
+  varName='resta'
+  auxdf=NULL
+  
+  
+  
+  for (i in 1:length(resultados$feature))
+  {
+    
+    for(j in 1:length(resultados$feature))
+    {
+      
+      if(resultados$feature[i]==resultados$feature[j])
+        next
+      
+      nombre=str_replace_all(paste(varName,resultados$feature[i],resultados$feature[j])," ","_")
+      valor=dataset3[,resultados$feature[i]]-dataset3[,resultados$feature[j]]
+      nombre=gsub(" ","",nombre)
+      
+      auxdf = data.frame(valor)
+      colnames(auxdf)=nombre
+      
+      datasetFinal=cbind(datasetFinal,auxdf)
+      
+      auxdf=NULL
+      
+    }
+    
+  }
+  
+  
+  return(datasetFinal)
+  
+  
+}
+
+
+
 
 #aqui comienza el programa
 
 #Establezco el Working Directory
-setwd( "D:\\gdrive\\ITBA2022A\\" )
-
+#setwd( "D:\\gdrive\\ITBA2022A\\" )
+setwd( "C:\\Users\\Martin\\Desktop\\MineriaDeDatos\\")
 
 #lectura de los datasets
-dataset1  <- fread("./datasets/paquete_premium_202011.csv")
-dataset2  <- fread("./datasets/paquete_premium_202101.csv")
+dataset1  <- data.frame(fread("./datasets/paquete_premium_202011.csv"))
+dataset2  <- data.frame(fread("./datasets/paquete_premium_202101.csv"))
+dataset3  <- data.frame(fread("./datasets/paquete_premium_202011_prob.csv")) #uso un set de datos con la prob estimada en lugar del 1 0 en clase +2
 
 
 #creo la carpeta donde va el experimento
 # FE  representa  Feature Engineering
 dir.create( "./labo/exp/",  showWarnings = FALSE ) 
 dir.create( "./labo/exp/FE4020/", showWarnings = FALSE )
-setwd("D:\\gdrive\\ITBA2022A\\labo\\exp\\FE4020\\")   #Establezco el Working Directory DEL EXPERIMENTO
+#setwd("D:\\gdrive\\ITBA2022A\\labo\\exp\\FE4020\\")   #Establezco el Working Directory DEL EXPERIMENTO
+setwd("C:\\Users\\Martin\\Desktop\\MineriaDeDatos\\labo\\exp\\FE4020\\")   #Establezco el Working Directory DEL EXPERIMENTO
 
-EnriquecerDataset( dataset1, "paquete_premium_202011_ext.csv" )
-EnriquecerDataset( dataset2, "paquete_premium_202101_ext.csv" )
 
+
+  
+  
+  ##Calculo los valores mas correlacionados
+ 
+  cor(dataset3$clase_ternaria,dataset3$clase_ternaria)
+  
+  nombres=names(dataset3)
+  
+  resultados=data.frame("feature"=nombres[1:(length(nombres)-1)],"correlacion"=1:(length(nombres)-1))
+  
+  
+  for (featureIndex in 1:(length(nombres)-1))
+  {
+    resultados$feature[featureIndex]=nombres[featureIndex]
+    resultados$correlacion[featureIndex]=cor(dataset3$clase_ternaria ,dataset3[,featureIndex],use="pairwise.complete.obs")
+  
+  }
+
+  resultados=subset(resultados,resultados$correlacion!='NA')    #elimino los NA
+  resultados=subset(resultados,abs(resultados$correlacio)>0.15)  #elimino correlaciones bajas
+  
+  ##
+
+  dataset1Mod=fuerzaBruta( dataset1 , resultados )
+  dataset2Mod=fuerzaBruta( dataset2 , resultados )
+  
+  
+  EnriquecerDataset( data.table(dataset1Mod), "paquete_premium_202011_ext.csv" )
+  EnriquecerDataset( data.table(dataset2Mod), "paquete_premium_202101_ext.csv" )
+  
+  
+  

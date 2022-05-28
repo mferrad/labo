@@ -19,18 +19,18 @@ require("mlrMBO")
 
 
 
-kBO_iter  <- 100   #cantidad de iteraciones de la Optimizacion Bayesiana
+kBO_iter  <- 20   #cantidad de iteraciones de la Optimizacion Bayesiana
 
 
 #Estructura que define los hiperparámetros y sus rangos
 hs  <- makeParamSet(
-          makeIntegerParam("num.trees" ,        lower=  100L, upper= 2500L),  #la letra L al final significa ENTERO
-          makeIntegerParam("max.depth",         lower=    1L, upper=   30L),  # 0 significa profundidad infinita
-          makeIntegerParam("min.node.size" ,    lower=    1L, upper=  500L),
-          makeIntegerParam("mtry" ,             lower=    2L, upper=   50L))
+          makeIntegerParam("num.trees" ,        lower=  2400L, upper= 2750L),  #la letra L al final significa ENTERO
+          makeIntegerParam("max.depth",         lower=    7L, upper=   30L),  # 0 significa profundidad infinita
+          makeIntegerParam("min.node.size" ,    lower=    400L, upper=  5000L),
+          makeIntegerParam("mtry" ,             lower=    4L, upper=   20L))
 
 
-ksemilla_azar  <- 102191  #Aqui poner la propia semilla
+ksemilla_azar  <- 200443  #Aqui poner la propia semilla
 
 #------------------------------------------------------------------------------
 #graba a un archivo los componentes de lista
@@ -145,7 +145,8 @@ EstimarGanancia_ranger  <- function( x )
 #Aqui comienza el programa
 
 #Aqui se debe poner la carpeta de la computadora local
-setwd("D:\\gdrive\\ITBA2022A\\")   #Establezco el Working Directory
+#setwd("D:\\gdrive\\ITBA2022A\\")   #Establezco el Working Directory
+setwd("C:\\Users\\Martin\\Desktop\\MineriaDeDatos\\")  
 
 #cargo el dataset donde voy a entrenar el modelo
 dataset  <- fread("./datasets/paquete_premium_202011.csv", stringsAsFactors= TRUE)   #donde entreno
@@ -155,7 +156,9 @@ dataset  <- fread("./datasets/paquete_premium_202011.csv", stringsAsFactors= TRU
 # HT  representa  Hiperparameter Tuning
 dir.create( "./labo/exp/",  showWarnings = FALSE ) 
 dir.create( "./labo/exp/HT4330/", showWarnings = FALSE )
-setwd("D:\\gdrive\\ITBA2022A\\labo\\exp\\HT4330\\")   #Establezco el Working Directory DEL EXPERIMENTO
+#setwd("D:\\gdrive\\ITBA2022A\\labo\\exp\\HT4330\\")   #Establezco el Working Directory DEL EXPERIMENTO
+setwd("C:\\Users\\Martin\\Desktop\\MineriaDeDatos\\labo\\exp\\HT4330\\")  
+
 
 #en estos archivos quedan los resultados
 kbayesiana  <- "HT433.RDATA"
