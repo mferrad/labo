@@ -1,0 +1,10 @@
+src/TareaHogarTRES/z652_lightgbm_motivacional.r
+Lineas	Ganancia (board publico)
+10000		19.39963
+10500		20.09462
+11000		20.54961
+11500		21.54459
+12000		21.65959
+12500		21.71459
+13000		21.54959
+13500    	21.63459
