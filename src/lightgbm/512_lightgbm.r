@@ -4,11 +4,16 @@
 rm( list=ls() )  #remove all objects
 gc()             #garbage collection
 
+p=1/60
+
 require("data.table")
 require("lightgbm")
 
 #Aqui se debe poner la carpeta de la computadora local
-setwd("D:\\gdrive\\ITBA2022A\\")   #Establezco el Working Directory
+#setwd("D:\\gdrive\\ITBA2022A\\")   #Establezco el Working Directory
+setwd("C:\\Users\\Martin\\Desktop\\MineriaDeDatos\\")  
+
+
 
 #cargo el dataset donde voy a entrenar
 dataset  <- fread("./datasets/paquete_premium_202011.csv", stringsAsFactors= TRUE)
@@ -30,24 +35,54 @@ dtrain  <- lgb.Dataset( data= data.matrix(  dataset[ , campos_buenos, with=FALSE
 
 
 #nota 
-#Respecto al script original cambie el num iterations a 1200 para que no me frene en un maximo local(estaba en 50)
 #Agregue el learning rate que no estaba
 #Agrege la prob de corte que tampoco estaba
 #Cambie la semilla por la mia
+#agrego el max bin tambien 
+
+# Este es el motivacional
+
+#modelo  <- lgb.train( data= dtrain,
+#                      param= list( objective=        "binary",
+#                                   max_bin=              31,
+#                                   learning_rate=         0.0300696989,
+#                                   num_iterations=      567,
+#                                   num_leaves=         1002,
+#                                   min_data_in_leaf=   6263,
+#                                   feature_fraction=      0.9100319271,
+#                                   seed=             102191
+#                      )
+#)
+
+# Este es el default (me faltan parametros comparados con el modelo de la bayesiana ignorar)
+#
+#modelo  <- lgb.train( data= dtrain,
+#                      param= list( objective=        "binary",
+#                                   learning_rate=         0.1,
+#                                   min_data_in_leaf=   20,
+#                                   feature_fraction=      1.0,
+#                                   seed=             102191,
+#                                   num_leaves =        31,
+#                                   prob_corte =       1/60,
+                                  
+#                                   max_bin=            31
+#                      )
+#)
+#p=1/60
 
 
-
-#genero el modelo con los parametros por default
+#Este es el modelo de la bayesiana
 modelo  <- lgb.train( data= dtrain,
                       param= list( objective=        "binary",
-                                   num_iterations=     1500,
-                                   num_leaves=         488,
-                                   feature_fraction=    0.514004462668102,
-                                   min_data_in_leaf= 3817,
-                                   learning_rate=0.0489526230834796,
-                                   prob_corte=0.0171184741242191,
-                                   seed= 200443 )
+                                   max_bin=            31,
+                                   num_iterations=     533,
+                                   num_leaves=         1315,
+                                   feature_fraction=    0.509636738987337,
+                                   min_data_in_leaf= 3934,
+                                   learning_rate=0.0101636464496809,
+                                   seed= 999983 )
                     )
+p=0.0169832543626759
 
 #aplico el modelo a los datos sin clase
 dapply  <- fread("./datasets/paquete_premium_202101.csv")
@@ -63,7 +98,7 @@ prediccion  <- predict( modelo,
 
 #Genero la entrega para Kaggle
 entrega  <- as.data.table( list( "numero_de_cliente"= dapply[  , numero_de_cliente],
-                                 "Predicted"= as.integer(prediccion > 1/60 ) )  ) #genero la salida
+                                 "Predicted"= as.integer(prediccion > p ) )  ) #genero la salida
 
 dir.create( "./labo/exp/",  showWarnings = FALSE ) 
 dir.create( "./labo/exp/KA2512/", showWarnings = FALSE )
