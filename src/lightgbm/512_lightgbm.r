@@ -72,17 +72,38 @@ dtrain  <- lgb.Dataset( data= data.matrix(  dataset[ , campos_buenos, with=FALSE
 
 
 #Este es el modelo de la bayesiana
+#modelo  <- lgb.train( data= dtrain,
+#                      param= list( objective=        "binary",
+#                                   max_bin=            31,
+#                                   num_iterations=     533,
+#                                   num_leaves=         1315,
+#                                   feature_fraction=    0.509636738987337,
+#                                   min_data_in_leaf= 3934,
+#                                   learning_rate=0.0101636464496809,
+#                                   seed= 999983 )
+#                    )
+#p=0.0169832543626759
+
+
+#Este es el modelo de la bayesiana con lamdas y demas parametros
 modelo  <- lgb.train( data= dtrain,
                       param= list( objective=        "binary",
                                    max_bin=            31,
-                                   num_iterations=     533,
-                                   num_leaves=         1315,
-                                   feature_fraction=    0.509636738987337,
-                                   min_data_in_leaf= 3934,
-                                   learning_rate=0.0101636464496809,
-                                   seed= 999983 )
-                    )
-p=0.0169832543626759
+                                   num_iterations=     234,
+                                   num_leaves=         996,
+                                   feature_fraction=    0.440686173080777,
+                                   min_data_in_leaf= 1334,
+                                   learning_rate=0.0438942719169011,
+                                   
+                                   min_gain_to_split=0.188008489892813,
+                                   max_depth=7,
+                                   lambda_l2=73.713755483181,
+                                   lambda_l1=0.59365566296864,
+                                   seed= 200443 )
+)
+p=0.0145648611386611
+
+
 
 #aplico el modelo a los datos sin clase
 dapply  <- fread("./datasets/paquete_premium_202101.csv")

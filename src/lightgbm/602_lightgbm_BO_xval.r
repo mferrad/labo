@@ -1,9 +1,10 @@
-#para correr en Google Cloud
-#   8 vCPU
-#  16 GB memoria RAM
-# 256 GB espacio en discolo
-# eliminar la vm al terminar de procesar
+#corre en la Google Cloud,  si el dataset de entrada es muy grande, debera poner mas memoria RAM
+#    8 vCPU
+#  128 GB  memoria RAM
+#  256 GB  espacio en disco
 
+
+# Este script esta pensado para correr en Google Cloud
 # Optimizacion Bayesiana de hiperparametros de  lightgbm, con el metodo TRADICIONAL de los hiperparametros originales de lightgbm
 # 5-fold cross validation
 # la probabilidad de corte es un hiperparametro
@@ -22,23 +23,31 @@ require("DiceKriging")
 require("mlrMBO")
 
 
-kBO_iter  <- 170   #aumento las iteraciones ya que tengo dos hiperparametros mas
+kBO_iter  <- 100   #cantidad de iteraciones de la Optimizacion Bayesiana
 
 #Aqui se cargan los hiperparametros
 hs <- makeParamSet( 
-  makeNumericParam("learning_rate",    lower=  0.01 , upper=    0.3),
-  makeNumericParam("feature_fraction", lower=  0.2  , upper=    1.0),
-  makeIntegerParam("min_data_in_leaf", lower=  0    , upper= 8000L),
-  makeIntegerParam("num_leaves",       lower= 16L   , upper= 1024L),
-  makeNumericParam("prob_corte",       lower= 1/120 , upper=  1/20),
-  makeNumericParam("lambda_l1",        lower=  0    , upper=   100),
-  makeNumericParam("lambda_l2",        lower=  0    , upper=   100),
-  makeIntegerParam("max_depth",        lower=  5L    , upper=   30L),
-  makeNumericParam("min_gain_to_split",        lower=  0.0,     upper=   0.2)
-)
+         makeNumericParam("learning_rate",    lower=  0.01 , upper=     0.3),
+         makeNumericParam("feature_fraction", lower=  0.2  , upper=     1.0),
+         makeIntegerParam("min_data_in_leaf", lower=  1    , upper= 20000),
+         makeIntegerParam("num_leaves",       lower= 16L   , upper=  2048),
+         makeNumericParam("prob_corte",       lower= 1/120 , upper=  1/20)  #esto sera visto en clase en gran detalle
+        )
 
 
-ksemilla_azar  <- 200443  #Aqui poner la propia semilla
+kprefijo       <- "HT601"
+ksemilla_azar  <- 102191  #Aqui poner la propia semilla
+kdataset       <- "./datasets/paquete_premium_ext_001.csv.gz"
+
+#donde entrenar
+ktrain_mes_desde    <- 201912        #mes desde donde entreno
+ktrain_mes_hasta    <- 202011        #mes hasta donde entreno, inclusive
+ktrain_meses_malos  <- c( 202006 )   #meses a excluir del entrenamiento
+
+
+kexperimento   <- paste0( kprefijo, "0" )
+kbayesiana     <- "BO.RDATA"
+klog           <- "BO_log.txt"
 
 #------------------------------------------------------------------------------
 #graba a un archivo los componentes de lista
@@ -99,15 +108,14 @@ EstimarGanancia_lightgbm  <- function( x )
                           boost_from_average= TRUE,
                           feature_pre_filter= FALSE,
                           verbosity= -100,
-                          seed= 200443,
-                          #max_depth=  -1,         # -1 significa no limitar,  por ahora lo dejo fijo
-                          #min_gain_to_split= 0.0, #por ahora, lo dejo fijo
-                          # lambda_l1= 0.0,       # ATENCION LINEA COMENTADA
-                          # lambda_l2= 0.0,       # ATENCION LINEA COMENTADA
+                          seed= 999983,
+                          max_depth=  -1,         # -1 significa no limitar,  por ahora lo dejo fijo
+                          min_gain_to_split= 0.0, #por ahora, lo dejo fijo
+                          lambda_l1= 0.0,         #por ahora, lo dejo fijo
+                          lambda_l2= 0.0,         #por ahora, lo dejo fijo
                           max_bin= 31,            #por ahora, lo dejo fijo
-                          num_iterations= 9999,   #un numero muy grande, lo limita early_stopping_rounds
-                          force_row_wise= TRUE,   #para que los alumnos no se atemoricen con tantos warning
-                          seed= 200443
+                          num_iterations= 9999,    #un numero muy grande, lo limita early_stopping_rounds
+                          force_row_wise= TRUE    #para que los alumnos no se atemoricen con tantos warning
                         )
 
   #el parametro discolo, que depende de otro
@@ -115,7 +123,7 @@ EstimarGanancia_lightgbm  <- function( x )
 
   param_completo  <- c( param_basicos, param_variable, x )
 
-  set.seed( 200443 )
+  set.seed( 999983 )
   modelocv  <- lgb.cv( data= dtrain,
                        eval= fganancia_logistic_lightgbm,
                        stratified= TRUE, #sobre el cross validation
@@ -135,14 +143,40 @@ EstimarGanancia_lightgbm  <- function( x )
   param_completo$num_iterations <- modelocv$best_iter  #asigno el mejor num_iterations
   param_completo["early_stopping_rounds"]  <- NULL     #elimino de la lista el componente  "early_stopping_rounds"
 
+  #si es una ganancia superadora, genero e imprimo ESA importancia de variables
+  if( ganancia_normalizada > GLOBAL_ganancia )
+  {
+    GLOBAL_ganancia  <<- ganancia_normalizada
+    modelo  <-  lgb.train( data= dtrain,
+                           eval= fganancia_logistic_lightgbm,
+                           param= param_completo,
+                           verbose= -100
+                         )
+
+    tb_importancia  <-  as.data.table( lgb.importance(modelo) ) 
+    archivo_importancia  <- paste0( "impo_",  sprintf( "%03d", GLOBAL_iteracion ), ".txt" )
+
+    fwrite( tb_importancia, 
+            file= archivo_importancia, 
+           sep= "\t" )
+
+  }
+
   #logueo 
   xx  <- param_completo
   xx$ganancia  <- ganancia_normalizada   #le agrego la ganancia
+  
+  xx$experimento  <- kexperimento
+  xx$cols         <- ncol( dtrain )
+  xx$rows         <- nrow( dtrain )
+
   xx$iteracion <- GLOBAL_iteracion
+
   loguear( xx, arch= klog )
 
   return( ganancia )
 }
+#------------------------------------------------------------------------------
 #------------------------------------------------------------------------------
 #Aqui empieza el programa
 
@@ -150,29 +184,26 @@ EstimarGanancia_lightgbm  <- function( x )
 setwd("~/buckets/b1/")   #Establezco el Working Directory
 
 #cargo el dataset donde voy a entrenar el modelo
-dataset  <- fread("./datasets/paquete_premium_202011.csv.gz")
+dataset  <- fread( kdataset )
 
 #creo la carpeta donde va el experimento
 # HT  representa  Hiperparameter Tuning
 dir.create( "./exp/",  showWarnings = FALSE ) 
-dir.create( "./exp/HT5370/", showWarnings = FALSE )
-setwd("~/buckets/b1/exp/HT5370/")   #Establezco el Working Directory DEL EXPERIMENTO
+dir.create( paste0("./exp/", kexperimento, "/" ), showWarnings = FALSE )
+setwd( paste0("./exp/", kexperimento, "/" ) )   #Establezco el Working Directory DEL EXPERIMENTO
 
-
-#en estos archivos quedan los resultados
-kbayesiana  <- "HT537.RDATA"
-klog        <- "HT537.txt"
 
 
 GLOBAL_iteracion  <- 0   #inicializo la variable global
+GLOBAL_ganancia   <- 0
 
 #si ya existe el archivo log, traigo hasta donde llegue
 if( file.exists(klog) )
 {
   tabla_log  <- fread( klog )
   GLOBAL_iteracion  <- nrow( tabla_log )
+  GLOBAL_ganancia   <- tabla_log[ , max( ganancia ) ]
 }
-
 
 
 #paso la clase a binaria que tome valores {0,1}  enteros
@@ -182,9 +213,21 @@ dataset[ , clase01 := ifelse( clase_ternaria=="BAJA+2", 1L, 0L) ]
 #los campos que se van a utilizar
 campos_buenos  <- setdiff( colnames(dataset), c("clase_ternaria","clase01") )
 
+
+#--------------------------------------
+#elijo donde voy a entrenar
+
+dataset[ , train  := 0L ]
+dataset[ foto_mes >= ktrain_mes_desde & 
+         foto_mes <= ktrain_mes_hasta &  
+         ! (foto_mes %in% ktrain_meses_malos ) ,
+         train  := 1L ]
+
+#--------------------------------------
+
 #dejo los datos en el formato que necesita LightGBM
-dtrain  <- lgb.Dataset( data= data.matrix(  dataset[ , campos_buenos, with=FALSE]),
-                        label= dataset$clase01 )
+dtrain  <- lgb.Dataset( data= data.matrix(  dataset[ train == 1L, campos_buenos, with=FALSE]),
+                        label= dataset[ train==1L, clase01]  )
 
 
 
@@ -220,6 +263,3 @@ if( !file.exists( kbayesiana ) ) {
 
 quit( save="no" )
 
-
-# pero nosotros  NO nos vamos a quedar tranquilos sin cuestionar los hiperparametros originales
-# min_data_in_leaf  y  num_leaves   estan relacionados entre ellos
