@@ -5,7 +5,7 @@ googlecloud:
 
 
 experiment:
-  script: "src/completo/z921_TS_generico.r"
+  script: "src/completo/z921_TS_generico.r"	
   restart: FALSE
   name: "exp"
   requires: [ "FE8120Martin" ] #Martin: Aca cambio y apunto al experimento anterior
@@ -28,7 +28,7 @@ param:
     periodos: [ ]
     rango:
       desde:  202001
-      hasta:  202009
+      hasta:  202009	
     excluir: [ 202006 ]
     undersampling: [ ]  #ATENCION  sin undersampling
 
