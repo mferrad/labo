@@ -25,12 +25,12 @@ param:
 
   #donde entreno
   train:
-    periodos: [ 0.6 ] 	#Agrego el undersampling de 0.6
+    periodos: [ ] 	
     rango:
       desde:  202001
       hasta:  202009	
     excluir: [ 202006 ]
-    undersampling: [ ]  #ATENCION  sin undersampling
+    undersampling: [{clase: "CONTINUA", prob: 0.1 } ]  #ATENCION  Martin: Agrego undersampling de 0.6
 
   #donde valido
   validate:

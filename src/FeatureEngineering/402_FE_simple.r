@@ -176,7 +176,7 @@ fuerzaBruta  <- function( dataset3 , resultados )
   for (i in 1:length(resultados$feature))
   {
     
-    for(j in 1:length(resultados$feature))
+    for(j in i:length(resultados$feature))
     {
       
       if(resultados$feature[i]==resultados$feature[j])
@@ -209,7 +209,7 @@ fuerzaBruta  <- function( dataset3 , resultados )
   for (i in 1:length(resultados$feature))
   {
     
-    for(j in 1:length(resultados$feature))
+    for(j in i:length(resultados$feature))
     {
       
       if(resultados$feature[i]==resultados$feature[j])
@@ -240,7 +240,7 @@ fuerzaBruta  <- function( dataset3 , resultados )
   for (i in 1:length(resultados$feature))
   {
     
-    for(j in 1:length(resultados$feature))
+    for(j in i:length(resultados$feature))
     {
       
       if(resultados$feature[i]==resultados$feature[j])
@@ -274,7 +274,7 @@ fuerzaBruta  <- function( dataset3 , resultados )
   for (i in 1:length(resultados$feature))
   {
     
-    for(j in 1:length(resultados$feature))
+    for(j in i:length(resultados$feature))
     {
       
       if(resultados$feature[i]==resultados$feature[j])
@@ -304,7 +304,7 @@ fuerzaBruta  <- function( dataset3 , resultados )
   for (i in 1:length(resultados$feature))
   {
     
-    for(j in 1:length(resultados$feature))
+    for(j in i:length(resultados$feature))
     {
       
       if(resultados$feature[i]==resultados$feature[j])
@@ -357,7 +357,7 @@ setwd("C:\\Users\\Martin\\Desktop\\MineriaDeDatos\\labo\\exp\\FE4020\\")   #Esta
 
   
   
-  ##Calculo los valores mas correlacionados
+  ########### Calculo los valores mas correlacionados######################
  
   cor(dataset3$clase_ternaria,dataset3$clase_ternaria)
   
@@ -376,10 +376,48 @@ setwd("C:\\Users\\Martin\\Desktop\\MineriaDeDatos\\labo\\exp\\FE4020\\")   #Esta
   resultados=subset(resultados,resultados$correlacion!='NA')    #elimino los NA
   resultados=subset(resultados,abs(resultados$correlacio)>0.15)  #elimino correlaciones bajas
   
-  ##
 
-  dataset1Mod=fuerzaBruta( dataset1 , resultados )
-  dataset2Mod=fuerzaBruta( dataset2 , resultados )
+
+
+
+#### Me creo un data frame con los valores que quiero analizar ########
+
+variablesTarget=(read.table("C:/Users/Martin/Desktop/MineriaDeDatos/datasets/variablesTarget.txt"))
+colnames(variablesTarget)="feature"
+  
+  
+#auxdf=NULL
+#resultados2=NULL
+
+#nombre=variablesTarget[1,]
+#valor=dataset1[,variablesTarget[1,]]
+#resultados2= data.frame(valor)
+#colnames(resultados2)=nombre
+
+#for (i in 2:length(variablesTarget[,]))
+#{
+#    nombre=variablesTarget[i,]
+#    valor=dataset1[,variablesTarget[i,]]
+  
+#    auxdf = data.frame(valor)
+#    colnames(auxdf)=nombre
+    
+#    resultados2=cbind(resultados2,auxdf)
+    
+#    auxdf=NULL
+
+#}
+
+
+
+  
+  
+  
+  
+   ##
+
+  dataset1Mod=fuerzaBruta( dataset1 , variablesTarget )
+  dataset2Mod=fuerzaBruta( dataset2 , variablesTarget )
   
   
   EnriquecerDataset( data.table(dataset1Mod), "paquete_premium_202011_ext.csv" )
