@@ -44,7 +44,7 @@ param:
     input:
       dentrada: [ "dataset" ]
     output:
-      dsalida: "datasetFuerzaBruta.csv.gz"	#Modifico el archivo de origen agregando las variables que se crearon
+      dsalida: "paquete_premium_ext.csv.gz"	
 
   const:
     clase: "clase_ternaria"
