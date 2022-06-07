@@ -262,7 +262,7 @@ AgregarVariables  <- function( dataset )
   
   #Variables correlacion maximo
   
-  dataset[ , max_ctarjeta_visa_trx_cpayroll_trx       := pmax( ctarjeta_visa,  visa_trx_cpayroll_trx , na.rm = TRUE) ]
+  dataset[ , max_ctarjeta_visa_trx_cpayroll_trx       := pmax( ctarjeta_visa_trx,  cpayroll_trx , na.rm = TRUE) ]
   dataset[ , max_ctarjeta_debito_trx_mdescubierto_preacordado       := pmax( ctarjeta_debito_trx,  mdescubierto_preacordado , na.rm = TRUE) ]
   dataset[ , max_cpayroll_trx_ccuenta_debitos_automaticos       := pmax( cpayroll_trx,  ccuenta_debitos_automaticos , na.rm = TRUE) ]
   dataset[ , max_cpayroll_trx_cpagomiscuentas       := pmax( max_cpayroll_trx,  cpagomiscuentas , na.rm = TRUE) ]
