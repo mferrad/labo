@@ -265,7 +265,7 @@ AgregarVariables  <- function( dataset )
   dataset[ , max_ctarjeta_visa_trx_cpayroll_trx       := pmax( ctarjeta_visa_trx,  cpayroll_trx , na.rm = TRUE) ]
   dataset[ , max_ctarjeta_debito_trx_mdescubierto_preacordado       := pmax( ctarjeta_debito_trx,  mdescubierto_preacordado , na.rm = TRUE) ]
   dataset[ , max_cpayroll_trx_ccuenta_debitos_automaticos       := pmax( cpayroll_trx,  ccuenta_debitos_automaticos , na.rm = TRUE) ]
-  dataset[ , max_cpayroll_trx_cpagomiscuentas       := pmax( max_cpayroll_trx,  cpagomiscuentas , na.rm = TRUE) ]
+  dataset[ , max_cpayroll_trx_cpagomiscuentas       := pmax(cpayroll_trx,  cpagomiscuentas , na.rm = TRUE) ]
   dataset[ , max_ctarjeta_master_ctarjeta_debito_trx       := pmax( ctarjeta_maste,  ctarjeta_debito_trx , na.rm = TRUE) ]
   dataset[ , max_cmobile_app_trx_chomebanking_trx       := pmax( cmobile_app_trx,  chomebanking_trx , na.rm = TRUE) ]
   dataset[ , max_ctarjeta_master_ccomisiones_mantenimiento       := pmax( tarjeta_master,  ccomisiones_mantenimiento , na.rm = TRUE) ]
