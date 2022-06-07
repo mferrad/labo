@@ -5,7 +5,7 @@ googlecloud:
 
 
 experiment:
-  script: "src/completo/912_FE_desborde2.r"	#Martin: aca cambio el nombre al archivo sin la Z
+  script: "src/completo/912_FE_desborde2.R"	#Martin: aca cambio el nombre al archivo sin la Z
   restart: FALSE
   name: "exp"
   requires: [ "DT0001" ]
