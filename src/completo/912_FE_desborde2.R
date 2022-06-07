@@ -324,7 +324,7 @@ AgregarVariables  <- function( dataset )
   dataset[ , div_mtarjeta_visa_consumo_chomebanking_trx         := mtarjeta_visa_consumo / chomebanking_trx ]
   dataset[ , div_chomebanking_trx_ctarjeta_master         := chomebanking_trx / ctarjeta_master ]
   dataset[ , div_chomebanking_trx_mdescubierto_preacordado         := chomebanking_trx / mdescubierto_preacordado ]
-  dataset[ , div_chomebanking_trx_ccomisiones_otras         := homebanking_trx / ccomisiones_otras ]
+  dataset[ , div_chomebanking_trx_ccomisiones_otras         := chomebanking_trx / ccomisiones_otras ]
   dataset[ , div_chomebanking_trx_cmobile_app_trx         := chomebanking_trx / cmobile_app_trx ]
   dataset[ , div_ccomisiones_mantenimiento_ctrx_quarter         := ccomisiones_mantenimiento / ctrx_quarter ]
   dataset[ , div_ccomisiones_otras_chomebanking_trx         := ccomisiones_otras / chomebanking_trx ]
