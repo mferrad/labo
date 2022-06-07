@@ -299,7 +299,7 @@ AgregarVariables  <- function( dataset )
   dataset[ , resta_ctarjeta_visa_trx_ccomisiones_otras         := ctarjeta_visa_trx - ccomisiones_otras ]
   dataset[ , resta_ctrx_quarter_ctarjeta_visa_trx         := ctrx_quarter - ctarjeta_visa_trx ]
   dataset[ , resta_ccomisiones_otras_cmobile_app_trx         := ccomisiones_otras - cmobile_app_trx ]
-  dataset[ , resta_cproductos_mdescubierto_preacordado         := cproductos_mdescubierto - preacordado ]
+  dataset[ , resta_cproductos_mdescubierto_preacordado         := cproductos - mdescubierto_preacordado ]
   dataset[ , resta_ctrx_quarter_mautoservicio         := ctrx_quarter - mautoservicio ]
   dataset[ , resta_ccomisiones_otras_ccuenta_debitos_automaticos         := ccomisiones_otras - ccuenta_debitos_automaticos ]
   dataset[ , resta_cproductos_ctarjeta_master         := cproductos - ctarjeta_master ]
