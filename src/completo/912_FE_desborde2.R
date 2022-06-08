@@ -353,6 +353,55 @@ AgregarVariables  <- function( dataset )
   dataset[ , mul_ctrx_quarter_ccomisiones_otras         := ctrx_quarter * ccomisiones_otras ]
   
   
+  #Variables lgbmppal max
+
+  dataset[ , max_mtarjeta_visa_consumo_mpayroll       := pmax( mtarjeta_visa_consumo,  mpayroll , na.rm = TRUE) ]
+  dataset[ , max_mtarjeta_visa_consumo_mcaja_ahorro       := pmax( mtarjeta_visa_consumo,  mcaja_ahorro , na.rm = TRUE) ]
+  dataset[ , max_mdescubierto_preacordado_mprestamos_personales       := pmax( mdescubierto_preacordado,  mprestamos_personales , na.rm = TRUE) ]
+  dataset[ , max_ctrx_quarter_mpayroll       := pmax( ctrx_quarter,  mpayroll , na.rm = TRUE) ]
+  dataset[ , max_mpayroll_ctarjeta_visa_trx       := pmax( mpayroll,  ctarjeta_visa_trx , na.rm = TRUE) ]
+  dataset[ , max_Master_status_Visa_status       := pmax( Master_status,  Visa_status , na.rm = TRUE) ]
+  dataset[ , max_mcaja_ahorro_mprestamos_personales       := pmax( mcaja_ahorro,  mprestamos_personales , na.rm = TRUE) ]
+  dataset[ , max_mtarjeta_visa_consumo_mcuentas_saldo       := pmax( mtarjeta_visa_consumo,  mcuentas_saldo , na.rm = TRUE) ]
+  dataset[ , max_mprestamos_personales_mrentabilidad_annual       := pmax( mprestamos_personales,  mrentabilidad_annual , na.rm = TRUE) ]
+
+  
+  #Variables lgbmppal min
+  dataset[ , min_Master_status_Visa_status       := pmin( Master_status,  Visa_status , na.rm = TRUE) ]
+  dataset[ , min_mprestamos_personales_Master_mfinanciacion_limite       := pmin( mprestamos_personales_Master,  mfinanciacion_limite , na.rm = TRUE) ]
+  dataset[ , min_mdescubierto_preacordado_mpasivos_margen       := pmin( mdescubierto_preacordado,  mpasivos_margen , na.rm = TRUE) ]
+  
+  #Variables lgbmppal suma
+  dataset[ , suma_mtarjeta_visa_consumo_mpayroll         := mtarjeta_visa + consumo_mpayroll ]
+  dataset[ , suma_ctrx_quarter_mpayroll         := ctrx_quarter + mpayroll ]
+  dataset[ , suma_mpayroll_ctarjeta_visa_trx         := mpayroll + ctarjeta_visa_trx ]
+  dataset[ , suma_mcuentas_saldo_mprestamos_personales         := mcuentas_saldo + mprestamos_personales ]
+  dataset[ , suma_mdescubierto_preacordado_mcaja_ahorro         := mdescubierto_preacordado + mcaja_ahorro ]
+  dataset[ , suma_mcuenta_corriente_mprestamos_personales         := mcuenta_corriente + mprestamos_personales ]
+  dataset[ , suma_foto_mes_Master_status         := foto_mes + Master_status ] ##????
+
+  
+  #Variables lgbmppal resta
+  dataset[ , resta_mcuentas_saldo_chomebanking_trx         := mcuentas_saldo - chomebanking_trx ]
+  
+  
+  #Variables lgbmppal mul
+  
+  dataset[ , mul_mcaja_ahorro_ctarjeta_visa_trx         := mcaja_ahorro * ctarjeta_visa_trx ]
+  dataset[ , mul_mtarjeta_visa_consumo_mcaja_ahorro         := mtarjeta_visa_consumo * mcaja_ahorro ]
+  dataset[ , mul_numero_de_cliente_cliente_edad         := numero_de_cliente * cliente_edad ] ##????
+  dataset[ , mul_ctrx_quarter_mcaja_ahorro         := ctrx_quarter * mtarjeta_visa_consumo ]
+  
+  
+  #Variables lgbmppal div
+  dataset[ , div_mrentabilidad_annual_mcomisiones_mantenimiento         := mrentabilidad_annual / mcomisiones_mantenimiento ]
+  dataset[ , div_foto_mes_mdescubierto_preacordado         := foto_mes / mdescubierto_preacordado ]###???
+  dataset[ , div_foto_mes_Visa_status         := foto_mes / Visa_status ] ###????
+  dataset[ , div_Master_status_Master_Fvencimiento         := Master_status / Master_Fvencimiento   ]
+  dataset[ , div_mdescubierto_preacordado_mcuentas_saldo         := mdescubierto_preacordado / mcuentas_saldo ]
+  
+  ###### Fin de mis variables #######
+  
   #valvula de seguridad para evitar valores infinitos
   #paso los infinitos a NULOS
   infinitos      <- lapply(names(dataset),function(.name) dataset[ , sum(is.infinite(get(.name)))])
