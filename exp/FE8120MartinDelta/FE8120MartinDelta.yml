@@ -33,8 +33,8 @@ param:
 
 
   #lags y sus deltas , 6 posiciones
-  lag:   [ TRUE, FALSE, FALSE, FALSE, TRUE, FALSE ]	#Martin: Cambio a TRUE para las pruebas
-  delta: [ FALSE, FALSE, TRUE, TRUE, TRUE, TRUE ]	#Martin: Cambio a False en principio (el primero)
+  lag:   [ FALSE, FALSE, FALSE, TRUE, TRUE, TRUE ]	#Martin: Cambio a TRUE para las pruebas
+  delta: [ FALSE, FALSE, FALSE, TRUE, TRUE, TRUE ]	#Martin: Cambio a False en principio (el primero)
   canaritosratio: [ 0.2, 0.2, 0.2, 0.2, 0.2, 0.2 ]	#Martin: Pongo todo los ratios de canaritos en 0.2
 
   tony:  FALSE
