@@ -25,8 +25,8 @@ param:
     correr: TRUE #Martin: Lo activo Great power comes with great responsability
     ventana: 6
     tendencia: TRUE		#Martin: Lo dejo en TRUE
-    minimo:    FALSE
-    maximo:    FALSE
+    minimo:    TRUE		#Martin Lo cambio a TRUE
+    maximo:    TRUE		#Martin Lo cambio a TRUE
     promedio:  TRUE		#Martin: Lo dejo en TRUE
     ratioavg:  TRUE		#Martin Lo cambio a TRUE
     ratiomax:  TRUE		#Martin Lo cambio a TRUE
