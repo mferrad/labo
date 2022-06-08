@@ -372,7 +372,7 @@ AgregarVariables  <- function( dataset )
   dataset[ , min_mdescubierto_preacordado_mpasivos_margen       := pmin( mdescubierto_preacordado,  mpasivos_margen , na.rm = TRUE) ]
   
   #Variables lgbmppal suma
-  dataset[ , suma_mtarjeta_visa_consumo_mpayroll         := mtarjeta_visa + consumo_mpayroll ]
+  dataset[ , suma_mtarjeta_visa_consumo_mpayroll         := mtarjeta_visa_consumo + mpayroll ]
   dataset[ , suma_ctrx_quarter_mpayroll         := ctrx_quarter + mpayroll ]
   dataset[ , suma_mpayroll_ctarjeta_visa_trx         := mpayroll + ctarjeta_visa_trx ]
   dataset[ , suma_mcuentas_saldo_mprestamos_personales         := mcuentas_saldo + mprestamos_personales ]
