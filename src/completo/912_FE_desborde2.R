@@ -368,7 +368,7 @@ AgregarVariables  <- function( dataset )
   
   #Variables lgbmppal min
   dataset[ , min_Master_status_Visa_status       := pmin( Master_status,  Visa_status , na.rm = TRUE) ]
-  dataset[ , min_mprestamos_personales_Master_mfinanciacion_limite       := pmin( mprestamos_personales_Master,  mfinanciacion_limite , na.rm = TRUE) ]
+  dataset[ , min_mprestamos_personales_Master_mfinanciacion_limite       := pmin( mprestamos_personales,  Master_mfinanciacion_limite , na.rm = TRUE) ]
   dataset[ , min_mdescubierto_preacordado_mpasivos_margen       := pmin( mdescubierto_preacordado,  mpasivos_margen , na.rm = TRUE) ]
   
   #Variables lgbmppal suma
