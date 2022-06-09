@@ -1,0 +1,60 @@
+googlecloud:
+  RAM:   128
+  vCPU:    8
+  disk:  256
+
+
+experiment:
+  script: "src/completo/912_FE_desborde3.R"	#Martin: aca cambio el nombre al archivo sin la Z
+  restart: FALSE
+  name: "exp"
+  requires: [ "DT0001" ]
+
+
+param:
+  dummiesNA: FALSE
+
+  corregir: TRUE    #se se corrige los campos/foto_mes  MALOS
+  variablesdrift: [] #variables que se eliminan porque estan mal en el futuro
+  
+  variablesmanuales: TRUE	#Martin Activo variables Manuales	
+
+  acumulavars: TRUE   #Martin: dejo que aplique a las variables nuevas
+
+  tendenciaYmuchomas: 
+    correr: TRUE #Martin: Lo activo Great power comes with great responsability
+    ventana: 6
+    tendencia: TRUE		#Martin: Lo dejo en TRUE
+    minimo:    FALSE		
+    maximo:    TRUE		#Martin Lo cambio a TRUE
+    promedio:  FALSE		#Martin: Lo dejo en TRUE
+    ratioavg:  TRUE		#Martin Lo cambio a TRUE
+    ratiomax:  FALSE		#Martin Lo cambio a TRUE
+
+
+  #lags y sus deltas , 6 posiciones
+  lag:   [ FALSE, FALSE, FALSE, FALSE, FALSE, FALSE ]	#Martin: Cambio a TRUE para las pruebas
+  delta: [ FALSE, FALSE, FALSE, FALSE, FALSE, TRUE ]	#Martin: Cambio a False en principio (el primero)
+  canaritosratio: [ 0.2, 0.2, 0.2, 0.2, 0.2, 0.2 ]	#Martin: Pongo todo los ratios de canaritos en 0.2
+
+  tony:  FALSE
+
+
+  files:
+    input:
+      dentrada: [ "dataset" ]
+    output:
+      dsalida: "paquete_premium_ext.csv.gz"	
+
+  const:
+    clase: "clase_ternaria"
+    futuro: [ 202101 ]
+    campos_sort:  [ "numero_de_cliente", "foto_mes" ]   #por donde hago el sort inicial
+    campos_fijos: [ "numero_de_cliente", "foto_mes", "mes", "clase_ternaria" ]
+    modelo:
+
+
+environment:
+  repo_dir: "~/labo/"
+  exp_dir:  "~/buckets/b1/exp/"
+  catalog:  "catalogo.txt"

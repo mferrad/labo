@@ -1022,7 +1022,7 @@ if( PARAM$tendenciaYmuchomas$correr )
   
   TendenciaYmuchomas( dataset, 
                       cols= cols_lagueables,
-                      ventana=   p$ventana/2,
+                      ventana=   5,
                       tendencia= p$tendencia,
                       minimo=    p$minimo,
                       maximo=    p$maximo,
@@ -1030,6 +1030,21 @@ if( PARAM$tendenciaYmuchomas$correr )
                       ratioavg=  p$ratioavg,
                       ratiomax=  p$ratiomax
   )
+  
+  p  <- PARAM$tendenciaYmuchomas
+  
+  TendenciaYmuchomas( dataset, 
+                      cols= cols_lagueables,
+                      ventana=   4,
+                      tendencia= p$tendencia,
+                      minimo=    p$minimo,
+                      maximo=    p$maximo,
+                      promedio=  p$promedio,
+                      ratioavg=  p$ratioavg,
+                      ratiomax=  p$ratiomax
+  )
+  
+  
 
   ################## Fin del cambio ########################################
   
