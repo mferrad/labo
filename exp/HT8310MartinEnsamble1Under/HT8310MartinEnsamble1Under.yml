@@ -31,7 +31,7 @@ param:
 
     learning_rate:      [ 0.02, 0.3]
     feature_fraction:   [ 0.1, 1.0 ]
-    num_leaves:         [ 1000, 3500, "integer" ]		#Martin: Cambie num leaves de 1024 a 2048
+    num_leaves:         [ 100, 3500, "integer" ]		#Martin: Cambie num leaves de 1024 a 2048
     min_data_in_leaf:   [  0, 8000, "integer" ]
 
     lambda_l1:  0                    # [ 0  ,  10]
