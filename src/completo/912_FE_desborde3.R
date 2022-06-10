@@ -1035,7 +1035,7 @@ if( PARAM$tendenciaYmuchomas$correr )
   
   TendenciaYmuchomas( dataset, 
                       cols= cols_lagueables,
-                      ventana=   4,
+                      ventana=   2,
                       tendencia= p$tendencia,
                       minimo=    p$minimo,
                       maximo=    p$maximo,
