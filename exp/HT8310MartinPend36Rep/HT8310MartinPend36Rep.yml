@@ -31,7 +31,7 @@ param:
 
     learning_rate:      [ 0.02, 0.3]
     feature_fraction:   [ 0.1, 1.0 ]
-    num_leaves:         [ 500, 3500, "integer" ]		#Martin: Cambie num leaves de 1024 a 3500
+    num_leaves:         [ 1000, 3500, "integer" ]		#Martin: Cambie num leaves de 1024 a 2048
     min_data_in_leaf:   [  0, 8000, "integer" ]
 
     lambda_l1:  0                    # [ 0  ,  10]
@@ -84,7 +84,7 @@ param:
       importancia: "impo_"
 
   const:
-    campo_clase: "clase_binaria"		#Martin: Cambio la clase binaria
+    campo_clase: "clase_ternaria"
     campo_periodo: "foto_mes"
     campo_id:  "numero_de_cliente"
     POS_ganancia: 59000
