@@ -81,16 +81,6 @@ arbolesCanaritos  <- function( dtrain,dapply,pesos,labels)
 
 
 
-
-
-
-
-
-
-
-
-
-
 #############################################################
 
 
@@ -121,13 +111,6 @@ datasetFinal=arbolesCanaritos(dtrain,dapply,pesos,labels)
 
 
 entrega=datasetFinal[, .(numero_de_cliente,probCan59, probCan120,probCan180,probCan220,probCan400)]
-
-
-
-
-
-
-
 
 
 
