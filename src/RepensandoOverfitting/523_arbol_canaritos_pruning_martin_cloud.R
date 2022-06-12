@@ -99,9 +99,11 @@ setwd("~/buckets/b1/")   #Establezco el Working Directory
 
 dataset  <- fread("./datasets/paquete_premium.csv.gz", stringsAsFactors= TRUE)
 
+
+
 setorder( dataset, clase_ternaria )
 
-
+datasetAux=dataset
 
 
 #cargo donde voy a aplicar el modelo
@@ -110,8 +112,7 @@ setorder( dataset, clase_ternaria )
 
 #uso esta semilla para los canaritos
 set.seed(10219)
-#pesos=c(1,25,59,120,180,220,400)
-pesos=c(1)
+pesos=c(1,59,400)
 labels=pesos
 for(i in 1:length(pesos))
 {
@@ -119,41 +120,32 @@ for(i in 1:length(pesos))
   dataset[ , paste0( labels[i], "") := -1  ]
 }
 
-dataset$probCan1=NA
 
 #### Agrego la probabilidad de darse de baja a Enero 2021 #####
-dtrain=dataset[foto_mes==202011]
+dtrain=datasetAux[foto_mes==202011]
 setorder( dtrain, clase_ternaria )
-dapply=dataset[foto_mes==202101]
+dapply=datasetAux[foto_mes==202101]
 
 datasetFinal=arbolesCanaritos(dtrain,dapply,pesos,labels)
 
 #Esta asignacion esta mal, tengo que ver como hacerlo sin referenciarlo directamente
 dataset[foto_mes==202101,probCan1:=datasetFinal$probCan1]
-dataset[foto_mes==202101,probCan25:=datasetFinal$probCan25]
 dataset[foto_mes==202101,probCan59:=datasetFinal$probCan59]
-dataset[foto_mes==202101,probCan120:=datasetFinal$probCan120]
-dataset[foto_mes==202101,probCan180:=datasetFinal$probCan180]
-dataset[foto_mes==202101,probCan220:=datasetFinal$probCan220]
 dataset[foto_mes==202101,probCan400:=datasetFinal$probCan400]
 
 #### Fin de Enero 2021 #####
 
 #### Agrego la probabilidad de darse de baja a Diciembre 2020 #####
 
-dtrain=dataset[foto_mes==202010]
+dtrain=datasetAux[foto_mes==202010]
 setorder( dtrain, clase_ternaria )
-dapply=dataset[foto_mes==202012]
+dapply=datasetAux[foto_mes==202012]
 
 datasetFinal=arbolesCanaritos(dtrain,dapply,pesos,labels)
 
 #Esta asignacion esta mal, tengo que ver como hacerlo sin referenciarlo directamente
 dataset[foto_mes==202012,probCan1:=datasetFinal$probCan1]
-dataset[foto_mes==202012,probCan25:=datasetFinal$probCan25]
 dataset[foto_mes==202012,probCan59:=datasetFinal$probCan59]
-dataset[foto_mes==202012,probCan120:=datasetFinal$probCan120]
-dataset[foto_mes==202012,probCan180:=datasetFinal$probCan180]
-dataset[foto_mes==202012,probCan220:=datasetFinal$probCan220]
 dataset[foto_mes==202012,probCan400:=datasetFinal$probCan400]
 
 #### Fin de Diciembre 2020 #####
@@ -162,38 +154,30 @@ dataset[foto_mes==202012,probCan400:=datasetFinal$probCan400]
 
 #### Agrego la probabilidad de darse de baja a Noviembre 2020 #####
 
-dtrain=dataset[foto_mes==202009]
+dtrain=datasetAux[foto_mes==202009]
 setorder( dtrain, clase_ternaria )
-dapply=dataset[foto_mes==202011]
+dapply=datasetAux[foto_mes==202011]
 
 datasetFinal=arbolesCanaritos(dtrain,dapply,pesos,labels)
 
 #Esta asignacion esta mal, tengo que ver como hacerlo sin referenciarlo directamente
 dataset[foto_mes==202011,probCan1:=datasetFinal$probCan1]
-dataset[foto_mes==202011,probCan25:=datasetFinal$probCan25]
 dataset[foto_mes==202011,probCan59:=datasetFinal$probCan59]
-dataset[foto_mes==202011,probCan120:=datasetFinal$probCan120]
-dataset[foto_mes==202011,probCan180:=datasetFinal$probCan180]
-dataset[foto_mes==202011,probCan220:=datasetFinal$probCan220]
 dataset[foto_mes==202011,probCan400:=datasetFinal$probCan400]
 
 #### Fin de Noviembre 2020 #####
 
 #### Agrego la probabilidad de darse de baja a Octubre 2020 #####
 
-dtrain=dataset[foto_mes==202008]
+dtrain=datasetAux[foto_mes==202008]
 setorder( dtrain, clase_ternaria )
-dapply=dataset[foto_mes==202010]
+dapply=datasetAux[foto_mes==202010]
 
 datasetFinal=arbolesCanaritos(dtrain,dapply,pesos,labels)
 
 #Esta asignacion esta mal, tengo que ver como hacerlo sin referenciarlo directamente
 dataset[foto_mes==202010,probCan1:=datasetFinal$probCan1]
-dataset[foto_mes==202010,probCan25:=datasetFinal$probCan25]
-dataset[foto_mes==202010,probCan59:=datasetFinal$probCan59]
-dataset[foto_mes==202010,probCan120:=datasetFinal$probCan120]
-dataset[foto_mes==202010,probCan180:=datasetFinal$probCan180]
-dataset[foto_mes==202010,probCan220:=datasetFinal$probCan220]
+dataset[foto_mes==202010,probCan120:=datasetFinal$probCan59]
 dataset[foto_mes==202010,probCan400:=datasetFinal$probCan400]
 
 #### Fin de Octubre 2020 #####
@@ -201,19 +185,15 @@ dataset[foto_mes==202010,probCan400:=datasetFinal$probCan400]
 
 #### Agrego la probabilidad de darse de baja a Sept 2020 #####
 
-dtrain=dataset[foto_mes==202007]  
+dtrain=datasetAux[foto_mes==202007]  
 setorder( dtrain, clase_ternaria )
-dapply=dataset[foto_mes==202009]  
+dapply=datasetAux[foto_mes==202009]  
 
 datasetFinal=arbolesCanaritos(dtrain,dapply,pesos,labels)
 
 #Esta asignacion esta mal, tengo que ver como hacerlo sin referenciarlo directamente
 dataset[foto_mes==202009,probCan1:=datasetFinal$probCan1]
-dataset[foto_mes==202009,probCan25:=datasetFinal$probCan25]
 dataset[foto_mes==202009,probCan59:=datasetFinal$probCan59]
-dataset[foto_mes==202009,probCan120:=datasetFinal$probCan120]
-dataset[foto_mes==202009,probCan180:=datasetFinal$probCan180]
-dataset[foto_mes==202009,probCan220:=datasetFinal$probCan220]
 dataset[foto_mes==202009,probCan400:=datasetFinal$probCan400]
 
 #### Fin de Sept 2020 #####
@@ -223,19 +203,15 @@ dataset[foto_mes==202009,probCan400:=datasetFinal$probCan400]
 
 #### Agrego la probabilidad de darse de baja a Agosto 2020 #####
 
-dtrain=dataset[foto_mes==202005]  #OJO entreno con mayo xq junio es horrible
+dtrain=datasetAux[foto_mes==202005]  #OJO entreno con mayo xq junio es horrible
 setorder( dtrain, clase_ternaria )
-dapply=dataset[foto_mes==202008]  
+dapply=datasetAux[foto_mes==202008]  
 
 datasetFinal=arbolesCanaritos(dtrain,dapply,pesos,labels)
 
 #Esta asignacion esta mal, tengo que ver como hacerlo sin referenciarlo directamente
 dataset[foto_mes==202008,probCan1:=datasetFinal$probCan1]
-dataset[foto_mes==202008,probCan25:=datasetFinal$probCan25]
 dataset[foto_mes==202008,probCan59:=datasetFinal$probCan59]
-dataset[foto_mes==202008,probCan120:=datasetFinal$probCan120]
-dataset[foto_mes==202008,probCan180:=datasetFinal$probCan180]
-dataset[foto_mes==202008,probCan220:=datasetFinal$probCan220]
 dataset[foto_mes==202008,probCan400:=datasetFinal$probCan400]
 
 #### Fin de Agosto 2020 #####
@@ -244,19 +220,15 @@ dataset[foto_mes==202008,probCan400:=datasetFinal$probCan400]
 
 #### Agrego la probabilidad de darse de baja a Julio 2020 #####
 
-dtrain=dataset[foto_mes==202005]  
+dtrain=datasetAux[foto_mes==202005]  
 setorder( dtrain, clase_ternaria )
-dapply=dataset[foto_mes==202007]  
+dapply=datasetAux[foto_mes==202007]  
 
 datasetFinal=arbolesCanaritos(dtrain,dapply,pesos,labels)
 
 #Esta asignacion esta mal, tengo que ver como hacerlo sin referenciarlo directamente
 dataset[foto_mes==202007,probCan1:=datasetFinal$probCan1]
-dataset[foto_mes==202007,probCan25:=datasetFinal$probCan25]
 dataset[foto_mes==202007,probCan59:=datasetFinal$probCan59]
-dataset[foto_mes==202007,probCan120:=datasetFinal$probCan120]
-dataset[foto_mes==202007,probCan180:=datasetFinal$probCan180]
-dataset[foto_mes==202007,probCan220:=datasetFinal$probCan220]
 dataset[foto_mes==202007,probCan400:=datasetFinal$probCan400]
 
 #### Fin de Julio 2020 #####
@@ -266,78 +238,62 @@ dataset[foto_mes==202007,probCan400:=datasetFinal$probCan400]
 
 #### Agrego la probabilidad de darse de baja a  Mayo 2020 #####
 
-dtrain=dataset[foto_mes==202003]  
+dtrain=datasetAux[foto_mes==202003]  
 setorder( dtrain, clase_ternaria )
-dapply=dataset[foto_mes==202005]  
+dapply=datasetAux[foto_mes==202005]  
 
 datasetFinal=arbolesCanaritos(dtrain,dapply,pesos,labels)
 
 #Esta asignacion esta mal, tengo que ver como hacerlo sin referenciarlo directamente
-dataset[foto_mes==202003,probCan1:=datasetFinal$probCan1]
-dataset[foto_mes==202003,probCan25:=datasetFinal$probCan25]
-dataset[foto_mes==202003,probCan59:=datasetFinal$probCan59]
-dataset[foto_mes==202003,probCan120:=datasetFinal$probCan120]
-dataset[foto_mes==202003,probCan180:=datasetFinal$probCan180]
-dataset[foto_mes==202003,probCan220:=datasetFinal$probCan220]
-dataset[foto_mes==202003,probCan400:=datasetFinal$probCan400]
+dataset[foto_mes==202005,probCan1:=datasetFinal$probCan1]
+dataset[foto_mes==202005,probCan59:=datasetFinal$probCan59]
+dataset[foto_mes==202005,probCan400:=datasetFinal$probCan400]
 
 #### Fin de Mayo 2020 #####
 
 
 #### Agrego la probabilidad de darse de baja a  Abril 2020 #####
 
-dtrain=dataset[foto_mes==202002]  
+dtrain=datasetAux[foto_mes==202002]  
 setorder( dtrain, clase_ternaria )
-dapply=dataset[foto_mes==202004]  
+dapply=datasetAux[foto_mes==202004]  
 
 datasetFinal=arbolesCanaritos(dtrain,dapply,pesos,labels)
 
 #Esta asignacion esta mal, tengo que ver como hacerlo sin referenciarlo directamente
-dataset[foto_mes==202002,probCan1:=datasetFinal$probCan1]
-dataset[foto_mes==202002,probCan25:=datasetFinal$probCan25]
-dataset[foto_mes==202002,probCan59:=datasetFinal$probCan59]
-dataset[foto_mes==202002,probCan120:=datasetFinal$probCan120]
-dataset[foto_mes==202002,probCan180:=datasetFinal$probCan180]
-dataset[foto_mes==202002,probCan220:=datasetFinal$probCan220]
-dataset[foto_mes==202002,probCan400:=datasetFinal$probCan400]
+dataset[foto_mes==202004,probCan1:=datasetFinal$probCan1]
+dataset[foto_mes==202004,probCan59:=datasetFinal$probCan59]
+dataset[foto_mes==202004,probCan400:=datasetFinal$probCan400]
 
 #### Fin de Abril 2020 #####
 
 
 #### Agrego la probabilidad de darse de baja a  Marzo 2020 #####
 
-dtrain=dataset[foto_mes==202001]  
+dtrain=datasetAux[foto_mes==202001]  
 setorder( dtrain, clase_ternaria )
-dapply=dataset[foto_mes==202003]  
+dapply=datasetAux[foto_mes==202003]  
 
 datasetFinal=arbolesCanaritos(dtrain,dapply,pesos,labels)
 
 #Esta asignacion esta mal, tengo que ver como hacerlo sin referenciarlo directamente
 dataset[foto_mes==202003,probCan1:=datasetFinal$probCan1]
-dataset[foto_mes==202003,probCan25:=datasetFinal$probCan25]
 dataset[foto_mes==202003,probCan59:=datasetFinal$probCan59]
-dataset[foto_mes==202003,probCan120:=datasetFinal$probCan120]
-dataset[foto_mes==202003,probCan180:=datasetFinal$probCan180]
-dataset[foto_mes==202003,probCan220:=datasetFinal$probCan220]
 dataset[foto_mes==202003,probCan400:=datasetFinal$probCan400]
 
 #### Fin de Marzo 2020 #####
 
 #### Agrego la probabilidad de darse de baja a  Febrero 2020 #####
 
-dtrain=dataset[foto_mes==201912]  
+dtrain=datasetAux[foto_mes==201912]  
 setorder( dtrain, clase_ternaria )
-dapply=dataset[foto_mes==202002]  
+dapply=datasetAux[foto_mes==202002]  
 
 datasetFinal=arbolesCanaritos(dtrain,dapply,pesos,labels)
 
 #Esta asignacion esta mal, tengo que ver como hacerlo sin referenciarlo directamente
 dataset[foto_mes==202002,probCan1:=datasetFinal$probCan1]
-dataset[foto_mes==202002,probCan25:=datasetFinal$probCan25]
 dataset[foto_mes==202002,probCan59:=datasetFinal$probCan59]
-dataset[foto_mes==202002,probCan120:=datasetFinal$probCan120]
-dataset[foto_mes==202002,probCan180:=datasetFinal$probCan180]
-dataset[foto_mes==202002,probCan220:=datasetFinal$probCan220]
 dataset[foto_mes==202002,probCan400:=datasetFinal$probCan400]
 
 #### Fin de Febrero 2020 #####
@@ -345,24 +301,18 @@ dataset[foto_mes==202002,probCan400:=datasetFinal$probCan400]
 
 #### Agrego la probabilidad de darse de baja a  Enero 2020 #####
 
-dtrain=dataset[foto_mes==201912]  
+dtrain=datasetAux[foto_mes==201911]  
 setorder( dtrain, clase_ternaria )
-dapply=dataset[foto_mes==202002]  
+dapply=datasetAux[foto_mes==202001]  
 
 datasetFinal=arbolesCanaritos(dtrain,dapply,pesos,labels)
 
 #Esta asignacion esta mal, tengo que ver como hacerlo sin referenciarlo directamente
-dataset[foto_mes==202002,probCan1:=datasetFinal$probCan1]
-dataset[foto_mes==202002,probCan25:=datasetFinal$probCan25]
-dataset[foto_mes==202002,probCan59:=datasetFinal$probCan59]
-dataset[foto_mes==202002,probCan120:=datasetFinal$probCan120]
-dataset[foto_mes==202002,probCan180:=datasetFinal$probCan180]
-dataset[foto_mes==202002,probCan220:=datasetFinal$probCan220]
-dataset[foto_mes==202002,probCan400:=datasetFinal$probCan400]
+dataset[foto_mes==202001,probCan1:=datasetFinal$probCan1]
+dataset[foto_mes==202001,probCan59:=datasetFinal$probCan59]
+dataset[foto_mes==202001,probCan400:=datasetFinal$probCan400]
 
 #### Fin de Enero 2020 #####
-
-
 
 
 
