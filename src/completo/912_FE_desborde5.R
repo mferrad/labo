@@ -257,10 +257,10 @@ AgregarVariables  <- function( dataset )
   dataset[ , min_mtarjeta_visa_consumo_Master_Finiciomora       := pmin( mtarjeta_visa_consumo,  Master_Finiciomora , na.rm = TRUE) ]
   dataset[ , min_ctrx_quarter_Master_Finiciomora       := pmin( ctrx_quarter,  Master_Finiciomora , na.rm = TRUE) ]
   dataset[ , min_ctrx_quarter_cproductos       := pmin( ctrx_quarter,  cproductos , na.rm = TRUE) ]
-  dataset[ , min_cmobile_app_trx_chomebanking_trx       := pmin( cmobile_app_trx,  chomebanking_trx , na.rm = TRUE) ]
-  dataset[ , min_ctrx_quarter_chomebanking_trx       := pmin( ctrx_quarter,  chomebanking_trx , na.rm = TRUE) ]
-  dataset[ , min_cproductos_chomebanking_trx       := pmin( cproductos,  chomebanking_trx , na.rm = TRUE) ]
-  dataset[ , min_ccomisiones_otras_cmobile_app_trx       := pmin( ccomisiones_otras,  cmobile_app_trx , na.rm = TRUE) ]
+  #dataset[ , min_cmobile_app_trx_chomebanking_trx       := pmin( cmobile_app_trx,  chomebanking_trx , na.rm = TRUE) ]
+  #dataset[ , min_ctrx_quarter_chomebanking_trx       := pmin( ctrx_quarter,  chomebanking_trx , na.rm = TRUE) ]
+  #dataset[ , min_cproductos_chomebanking_trx       := pmin( cproductos,  chomebanking_trx , na.rm = TRUE) ]
+  #dataset[ , min_ccomisiones_otras_cmobile_app_trx       := pmin( ccomisiones_otras,  cmobile_app_trx , na.rm = TRUE) ]
   
   #Variables correlacion maximo
   
@@ -271,10 +271,10 @@ AgregarVariables  <- function( dataset )
   dataset[ , max_ctarjeta_master_ctarjeta_debito_trx       := pmax( ctarjeta_master,  ctarjeta_debito_trx , na.rm = TRUE) ]
   dataset[ , max_cmobile_app_trx_chomebanking_trx       := pmax( cmobile_app_trx,  chomebanking_trx , na.rm = TRUE) ]
   dataset[ , max_ctarjeta_master_ccomisiones_mantenimiento       := pmax( ctarjeta_master,  ccomisiones_mantenimiento , na.rm = TRUE) ]
-  dataset[ , max_mdescubierto_preacordado_cextraccion_autoservicio       := pmax( mdescubierto_preacordado,  cextraccion_autoservicio , na.rm = TRUE) ]
-  dataset[ , max_ctrx_quarter_chomebanking_trx       := pmax( ctrx_quarter,  chomebanking_trx , na.rm = TRUE) ]
-  dataset[ , max_ctarjeta_visa_trx_cextraccion_autoservicio       := pmax( ctarjeta_visa_trx,  cextraccion_autoservicio , na.rm = TRUE) ]
-  dataset[ , max_cproductos_ctarjeta_visa_trx       := pmax( cproductos,  ctarjeta_visa_trx , na.rm = TRUE) ]
+  #dataset[ , max_mdescubierto_preacordado_cextraccion_autoservicio       := pmax( mdescubierto_preacordado,  cextraccion_autoservicio , na.rm = TRUE) ]
+  #dataset[ , max_ctrx_quarter_chomebanking_trx       := pmax( ctrx_quarter,  chomebanking_trx , na.rm = TRUE) ]
+  #dataset[ , max_ctarjeta_visa_trx_cextraccion_autoservicio       := pmax( ctarjeta_visa_trx,  cextraccion_autoservicio , na.rm = TRUE) ]
+  #dataset[ , max_cproductos_ctarjeta_visa_trx       := pmax( cproductos,  ctarjeta_visa_trx , na.rm = TRUE) ]
   
   #variables correlacion suma
   
@@ -286,9 +286,9 @@ AgregarVariables  <- function( dataset )
   dataset[ , suma_cproductos_ccuenta_debitos_automaticos         := cproductos + ccuenta_debitos_automaticos ]
   dataset[ , suma_ctrx_quarter_chomebanking_trx         := ctrx_quarter + chomebanking_trx ]
   dataset[ , suma_cproductos_ctarjeta_visa_trx         := cproductos + ctarjeta_visa_trx ]
-  dataset[ , suma_mdescubierto_preacordado_ccomisiones_mantenimiento         := mdescubierto_preacordado + ccomisiones_mantenimiento ]
-  dataset[ , suma_cmobile_app_trx_chomebanking_trx         := cmobile_app_trx + chomebanking_trx ]
-  dataset[ , suma_ctarjeta_visa_ccomisiones_mantenimiento         := ctarjeta_visa + ccomisiones_mantenimiento ]
+  #dataset[ , suma_mdescubierto_preacordado_ccomisiones_mantenimiento         := mdescubierto_preacordado + ccomisiones_mantenimiento ]
+  #dataset[ , suma_cmobile_app_trx_chomebanking_trx         := cmobile_app_trx + chomebanking_trx ]
+  #dataset[ , suma_ctarjeta_visa_ccomisiones_mantenimiento         := ctarjeta_visa + ccomisiones_mantenimiento ]
   
   
   #variables correlacion resta
@@ -302,9 +302,9 @@ AgregarVariables  <- function( dataset )
   dataset[ , resta_ctrx_quarter_ctarjeta_visa_trx         := ctrx_quarter - ctarjeta_visa_trx ]
   dataset[ , resta_ccomisiones_otras_cmobile_app_trx         := ccomisiones_otras - cmobile_app_trx ]
   dataset[ , resta_cproductos_mdescubierto_preacordado         := cproductos - mdescubierto_preacordado ]
-  dataset[ , resta_ctrx_quarter_mautoservicio         := ctrx_quarter - mautoservicio ]
-  dataset[ , resta_ccomisiones_otras_ccuenta_debitos_automaticos         := ccomisiones_otras - ccuenta_debitos_automaticos ]
-  dataset[ , resta_cproductos_ctarjeta_master         := cproductos - ctarjeta_master ]
+  #dataset[ , resta_ctrx_quarter_mautoservicio         := ctrx_quarter - mautoservicio ]
+  #dataset[ , resta_ccomisiones_otras_ccuenta_debitos_automaticos         := ccomisiones_otras - ccuenta_debitos_automaticos ]
+  #dataset[ , resta_cproductos_ctarjeta_master         := cproductos - ctarjeta_master ]
   
   
   #variables correlacion div
@@ -330,16 +330,16 @@ AgregarVariables  <- function( dataset )
   dataset[ , div_chomebanking_trx_cmobile_app_trx         := chomebanking_trx / cmobile_app_trx ]
   dataset[ , div_ccomisiones_mantenimiento_ctrx_quarter         := ccomisiones_mantenimiento / ctrx_quarter ]
   dataset[ , div_ccomisiones_otras_chomebanking_trx         := ccomisiones_otras / chomebanking_trx ]
-  dataset[ , div_ctrx_quarter_chomebanking_trx         := ctrx_quarter / chomebanking_trx ]
-  dataset[ , div_cproductos_ccomisiones_otras         := cproductos / ccomisiones_otras ]
-  dataset[ , div_ctarjeta_visa_debitos_automaticos_mtarjeta_visa_consumo         := ctarjeta_visa_debitos_automaticos / mtarjeta_visa_consumo ]
-  dataset[ , div_ctransferencias_emitidas_cpayroll_trx         := ctransferencias_emitidas / cpayroll_trx ]
-  dataset[ , div_ctarjeta_visa_ctarjeta_master         := ctarjeta_visa / ctarjeta_master ]
-  dataset[ , div_cproductos_ctrx_quarter         := cproductos / ctrx_quarter ]
-  dataset[ , div_chomebanking_trx_ctrx_quarter         := chomebanking_trx / ctrx_quarter ]
-  dataset[ , div_ctrx_quarter_ctarjeta_visa_trx         := ctrx_quarter / ctarjeta_visa_trx ]
-  dataset[ , div_cpayroll_trx_ctarjeta_visa         := cpayroll_trx / ctarjeta_visa ]
-  dataset[ , div_ctrx_quarter_mtarjeta_visa_consumo         := ctrx_quarter / mtarjeta_visa_consumo ]
+  #dataset[ , div_ctrx_quarter_chomebanking_trx         := ctrx_quarter / chomebanking_trx ]
+  #dataset[ , div_cproductos_ccomisiones_otras         := cproductos / ccomisiones_otras ]
+  #dataset[ , div_ctarjeta_visa_debitos_automaticos_mtarjeta_visa_consumo         := ctarjeta_visa_debitos_automaticos / mtarjeta_visa_consumo ]
+  #dataset[ , div_ctransferencias_emitidas_cpayroll_trx         := ctransferencias_emitidas / cpayroll_trx ]
+  #dataset[ , div_ctarjeta_visa_ctarjeta_master         := ctarjeta_visa / ctarjeta_master ]
+  #dataset[ , div_cproductos_ctrx_quarter         := cproductos / ctrx_quarter ]
+  #dataset[ , div_chomebanking_trx_ctrx_quarter         := chomebanking_trx / ctrx_quarter ]
+  #dataset[ , div_ctrx_quarter_ctarjeta_visa_trx         := ctrx_quarter / ctarjeta_visa_trx ]
+  #dataset[ , div_cpayroll_trx_ctarjeta_visa         := cpayroll_trx / ctarjeta_visa ]
+  #dataset[ , div_ctrx_quarter_mtarjeta_visa_consumo         := ctrx_quarter / mtarjeta_visa_consumo ]
 
   
 
@@ -350,9 +350,9 @@ AgregarVariables  <- function( dataset )
   dataset[ , mul_ctrx_quarter_mdescubierto_preacordado         := ctrx_quarter * mdescubierto_preacordado ]
   dataset[ , mul_cpayroll_trx_mtarjeta_visa_consumo         := cpayroll_trx * mtarjeta_visa_consumo ]
   dataset[ , mul_mdescubierto_preacordado_mtarjeta_visa_consumo         := mdescubierto_preacordado * mtarjeta_visa_consumo ]
-  dataset[ , mul_ctrx_quarter_cproductos         := ctrx_quarter * cproductos  ]
-  dataset[ , mul_ctarjeta_visa_trx_cpayroll_trx         := ctarjeta_visa_trx * cpayroll_trx ]
-  dataset[ , mul_ctrx_quarter_ccomisiones_otras         := ctrx_quarter * ccomisiones_otras ]
+  #dataset[ , mul_ctrx_quarter_cproductos         := ctrx_quarter * cproductos  ]
+  #dataset[ , mul_ctarjeta_visa_trx_cpayroll_trx         := ctarjeta_visa_trx * cpayroll_trx ]
+  #dataset[ , mul_ctrx_quarter_ccomisiones_otras         := ctrx_quarter * ccomisiones_otras ]
   
   
   #Variables lgbmppal max
@@ -363,15 +363,15 @@ AgregarVariables  <- function( dataset )
   dataset[ , max_ctrx_quarter_mpayroll       := pmax( ctrx_quarter,  mpayroll , na.rm = TRUE) ]
   dataset[ , max_mpayroll_ctarjeta_visa_trx       := pmax( mpayroll,  ctarjeta_visa_trx , na.rm = TRUE) ]
   dataset[ , max_Master_status_Visa_status       := pmax( Master_status,  Visa_status , na.rm = TRUE) ]
-  dataset[ , max_mcaja_ahorro_mprestamos_personales       := pmax( mcaja_ahorro,  mprestamos_personales , na.rm = TRUE) ]
-  dataset[ , max_mtarjeta_visa_consumo_mcuentas_saldo       := pmax( mtarjeta_visa_consumo,  mcuentas_saldo , na.rm = TRUE) ]
-  dataset[ , max_mprestamos_personales_mrentabilidad_annual       := pmax( mprestamos_personales,  mrentabilidad_annual , na.rm = TRUE) ]
+  #dataset[ , max_mcaja_ahorro_mprestamos_personales       := pmax( mcaja_ahorro,  mprestamos_personales , na.rm = TRUE) ]
+  #dataset[ , max_mtarjeta_visa_consumo_mcuentas_saldo       := pmax( mtarjeta_visa_consumo,  mcuentas_saldo , na.rm = TRUE) ]
+  #dataset[ , max_mprestamos_personales_mrentabilidad_annual       := pmax( mprestamos_personales,  mrentabilidad_annual , na.rm = TRUE) ]
 
   
   #Variables lgbmppal min
   dataset[ , min_Master_status_Visa_status       := pmin( Master_status,  Visa_status , na.rm = TRUE) ]
   dataset[ , min_mprestamos_personales_Master_mfinanciacion_limite       := pmin( mprestamos_personales,  Master_mfinanciacion_limite , na.rm = TRUE) ]
-  dataset[ , min_mdescubierto_preacordado_mpasivos_margen       := pmin( mdescubierto_preacordado,  mpasivos_margen , na.rm = TRUE) ]
+  #dataset[ , min_mdescubierto_preacordado_mpasivos_margen       := pmin( mdescubierto_preacordado,  mpasivos_margen , na.rm = TRUE) ]
   
   #Variables lgbmppal suma
   dataset[ , suma_mtarjeta_visa_consumo_mpayroll         := mtarjeta_visa_consumo + mpayroll ]
@@ -379,8 +379,8 @@ AgregarVariables  <- function( dataset )
   dataset[ , suma_mpayroll_ctarjeta_visa_trx         := mpayroll + ctarjeta_visa_trx ]
   dataset[ , suma_mcuentas_saldo_mprestamos_personales         := mcuentas_saldo + mprestamos_personales ]
   dataset[ , suma_mdescubierto_preacordado_mcaja_ahorro         := mdescubierto_preacordado + mcaja_ahorro ]
-  dataset[ , suma_mcuenta_corriente_mprestamos_personales         := mcuenta_corriente + mprestamos_personales ]
-  dataset[ , suma_foto_mes_Master_status         := foto_mes + Master_status ] ##????
+  #dataset[ , suma_mcuenta_corriente_mprestamos_personales         := mcuenta_corriente + mprestamos_personales ]
+  #dataset[ , suma_foto_mes_Master_status         := foto_mes + Master_status ] ##????
 
   
   #Variables lgbmppal resta
@@ -391,13 +391,13 @@ AgregarVariables  <- function( dataset )
   
   dataset[ , mul_mcaja_ahorro_ctarjeta_visa_trx         := mcaja_ahorro * ctarjeta_visa_trx ]
   dataset[ , mul_mtarjeta_visa_consumo_mcaja_ahorro         := mtarjeta_visa_consumo * mcaja_ahorro ]
-  dataset[ , mul_numero_de_cliente_cliente_edad         := numero_de_cliente * cliente_edad ] ##????
+  #dataset[ , mul_numero_de_cliente_cliente_edad         := numero_de_cliente * cliente_edad ] ##????
   dataset[ , mul_ctrx_quarter_mcaja_ahorro         := ctrx_quarter * mtarjeta_visa_consumo ]
   
   
   #Variables lgbmppal div
   dataset[ , div_mrentabilidad_annual_mcomisiones_mantenimiento         := mrentabilidad_annual / mcomisiones_mantenimiento ]
-  dataset[ , div_foto_mes_mdescubierto_preacordado         := foto_mes / mdescubierto_preacordado ]###???
+  #dataset[ , div_foto_mes_mdescubierto_preacordado         := foto_mes / mdescubierto_preacordado ]###???
   dataset[ , div_foto_mes_Visa_status         := foto_mes / Visa_status ] ###????
   dataset[ , div_Master_status_Master_Fvencimiento         := Master_status / Master_Fvencimiento   ]
   dataset[ , div_mdescubierto_preacordado_mcuentas_saldo         := mdescubierto_preacordado / mcuentas_saldo ]
@@ -410,17 +410,17 @@ AgregarVariables  <- function( dataset )
   
   dataset[ , neg_suma_salidas_tarjeta       := Master_mconsumospesos+Master_mconsumosdolares+Master_madelantopesos+Master_madelantodolares+Visa_mconsumospesos+Visa_mconsumosdolares+Visa_madelantopesos+Visa_madelantodolares ]
   dataset[ , neg_max_salidas_tarjeta       := pmax( Master_mconsumospesos,Master_mconsumosdolares,Master_madelantopesos,Master_madelantodolares,Visa_mconsumospesos,Visa_mconsumosdolares,Visa_madelantopesos,Visa_madelantodolares, na.rm = TRUE) ]
-  dataset[ , neg_min_salidas_tarjeta       := pmin( Master_mconsumospesos,Master_mconsumosdolares,Master_madelantopesos,Master_madelantodolares,Visa_mconsumospesos,Visa_mconsumosdolares,Visa_madelantopesos,Visa_madelantodolares, na.rm = TRUE) ]
+  #dataset[ , neg_min_salidas_tarjeta       := pmin( Master_mconsumospesos,Master_mconsumosdolares,Master_madelantopesos,Master_madelantodolares,Visa_mconsumospesos,Visa_mconsumosdolares,Visa_madelantopesos,Visa_madelantodolares, na.rm = TRUE) ]
   
   ### Transacciones ####
   
   dataset[ , neg_suma_Transacciones_Recividas       :=  mtransferencias_recibidas+mcheques_depositados+mcheques_depositados-mcheques_depositados_rechazados]
   dataset[ , neg_max_Transacciones_Recividas       := pmax( mtransferencias_recibidas,(mcheques_depositados-mcheques_depositados_rechazados), na.rm = TRUE) ]
-  dataset[ , neg_min_Transacciones_Recividas       := pmin( mtransferencias_recibidas,(mcheques_depositados-mcheques_depositados_rechazados), na.rm = TRUE) ]
+  #dataset[ , neg_min_Transacciones_Recividas       := pmin( mtransferencias_recibidas,(mcheques_depositados-mcheques_depositados_rechazados), na.rm = TRUE) ]
   
   dataset[ , neg_suma_Transacciones_Enviadas       :=  mtransferencias_emitidas+mextraccion_autoservicio+mcheques_emitidos+mautoservicio-mcheques_emitidos_rechazados+mpagomiscuentas+mpagodeservicios]
   dataset[ , neg_max_Transacciones_Enviadas       := pmax( mtransferencias_emitidas,mextraccion_autoservicio,(mcheques_emitidos-mcheques_emitidos_rechazados),mautoservicio,mpagomiscuentas,mpagodeservicios, na.rm = TRUE) ]
-  dataset[ , neg_min_Transacciones_Enviadas       := pmin( mtransferencias_emitidas,mextraccion_autoservicio,(mcheques_emitidos-mcheques_emitidos_rechazados),mautoservicio,mpagomiscuentas,mpagodeservicios, na.rm = TRUE) ]
+  #dataset[ , neg_min_Transacciones_Enviadas       := pmin( mtransferencias_emitidas,mextraccion_autoservicio,(mcheques_emitidos-mcheques_emitidos_rechazados),mautoservicio,mpagomiscuentas,mpagodeservicios, na.rm = TRUE) ]
   
   
   dataset[ , neg_suma_Transacciones_Indice  :=  neg_suma_Transacciones_Recividas/neg_suma_Transacciones_Enviadas]
@@ -432,16 +432,16 @@ AgregarVariables  <- function( dataset )
   
   dataset[ , neg_suma_salidas_fijas       := mcuenta_debitos_automaticos+mtarjeta_visa_debitos_automaticos+mttarjeta_master_debitos_automaticos]
   dataset[ , neg_max_salidas_fijas    := pmax(mcuenta_debitos_automaticos,mtarjeta_visa_debitos_automaticos,mttarjeta_master_debitos_automaticos , na.rm = TRUE)] 
-  dataset[ , neg_min_salidas_fijas    := pmin(mcuenta_debitos_automaticos,mtarjeta_visa_debitos_automaticos,mttarjeta_master_debitos_automaticos, na.rm = TRUE)]
+  #dataset[ , neg_min_salidas_fijas    := pmin(mcuenta_debitos_automaticos,mtarjeta_visa_debitos_automaticos,mttarjeta_master_debitos_automaticos, na.rm = TRUE)]
   
   dataset[ , neg_suma_entradas_fijas       := mpayroll+mpayroll2]
   dataset[ , neg_max_entradas_fijas    := pmax(mpayroll,mpayroll2 , na.rm = TRUE)] 
-  dataset[ , neg_min_entradas_fijas    := pmin(mpayroll,mpayroll2, na.rm = TRUE)]
+  #dataset[ , neg_min_entradas_fijas    := pmin(mpayroll,mpayroll2, na.rm = TRUE)]
   
   
   dataset[ , neg_Indice_salidas_Entradas_fijas := neg_suma_entradas_fijas/neg_suma_salidas_fijas]
   dataset[ , neg_Indice_salidas_Entradas_fijas_max := neg_max_entradas_fijas/neg_max_salidas_fijas]
-  dataset[ , neg_Indice_salidas_Entradas_fijas_min := neg_min_entradas_fijas/neg_min_salidas_fijas]
+  #dataset[ , neg_Indice_salidas_Entradas_fijas_min := neg_min_entradas_fijas/neg_min_salidas_fijas]
   dataset[ , neg_resta_salidas_Entradas_fijas := neg_suma_entradas_fijas-neg_suma_salidas_fijas]
   
   #### Inversiones y Deuda #########
@@ -449,22 +449,22 @@ AgregarVariables  <- function( dataset )
   
   dataset[ , neg_suma_inversion       := mplazo_fijo_dolares+mplazo_fijo_pesos+minversion1_pesos+minversion1_dolares]
   dataset[ , neg_max_inversion     := pmax( mplazo_fijo_dolares,mplazo_fijo_pesos,minversion1_pesos,minversion1_dolares, na.rm = TRUE) ]  
-  dataset[ , neg_min_inversion     := pmin( mplazo_fijo_dolares,mplazo_fijo_pesos,minversion1_pesos,minversion1_dolares, na.rm = TRUE) ]
+  #dataset[ , neg_min_inversion     := pmin( mplazo_fijo_dolares,mplazo_fijo_pesos,minversion1_pesos,minversion1_dolares, na.rm = TRUE) ]
   
   dataset[ , neg_suma_dueda       := mprestamos_personales+mprestamos_prendarios+mprestamos_hipotecarios]
   dataset[ , neg_max_deuda     := pmax( mprestamos_personales,mprestamos_prendarios,mprestamos_hipotecarios, na.rm = TRUE) ]  
-  dataset[ , neg_min_deuda     := pmin( mprestamos_personales,mprestamos_prendarios,mprestamos_hipotecarios, na.rm = TRUE) ]
+  #dataset[ , neg_min_deuda     := pmin( mprestamos_personales,mprestamos_prendarios,mprestamos_hipotecarios, na.rm = TRUE) ]
   
   dataset[ , neg_Indice_duedaInversion       := neg_suma_inversion/neg_suma_dueda]
   dataset[ , neg_resta_duedaInversion       := neg_suma_inversion-neg_suma_dueda]
   dataset[ , neg_Indice_duedaInversion_max       := neg_max_inversion/neg_max_deuda]
-  dataset[ , neg_Indice_duedaInversion_min       := neg_min_inversion/neg_min_deuda]
+  #dataset[ , neg_Indice_duedaInversion_min       := neg_min_inversion/neg_min_deuda]
   
   #### Activos ####
   
   dataset[ , neg_suma_Activos       := mcuenta_corriente_adicional+mcaja_ahorro+mcaja_ahorro_dolares]
   dataset[ , neg_max_Activos     := pmax( mcuenta_corriente_adicional,mcaja_ahorro,mcaja_ahorro_dolares, na.rm = TRUE) ]  
-  dataset[ , neg_min_Activos     := pmin( mcuenta_corriente_adicional,mcaja_ahorro,mcaja_ahorro_dolares, na.rm = TRUE) ]  
+  #dataset[ , neg_min_Activos     := pmin( mcuenta_corriente_adicional,mcaja_ahorro,mcaja_ahorro_dolares, na.rm = TRUE) ]  
   
   
   #### Otros indicies y mas variables ######
