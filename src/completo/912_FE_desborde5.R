@@ -421,7 +421,7 @@ AgregarVariables  <- function( dataset )
   dataset[ , neg_suma_Transacciones_Enviadas       :=  mtransferencias_emitidas+mextraccion_autoservicio+mcheques_emitidos+mautoservicio-mcheques_emitidos_rechazados+mpagomiscuentas+mpagodeservicios]
   dataset[ , neg_max_Transacciones_Enviadas       := pmax( mtransferencias_emitidas,mextraccion_autoservicio,(mcheques_emitidos-mcheques_emitidos_rechazados),mautoservicio,mpagomiscuentas,mpagodeservicios, na.rm = TRUE) ]
   dataset[ , neg_min_Transacciones_Enviadas       := pmin( mtransferencias_emitidas,mextraccion_autoservicio,(mcheques_emitidos-mcheques_emitidos_rechazados),mautoservicio,mpagomiscuentas,mpagodeservicios, na.rm = TRUE) ]
-
+  
   
   dataset[ , neg_suma_Transacciones_Indice  :=  neg_suma_Transacciones_Recividas/neg_suma_Transacciones_Enviadas]
   dataset[ , neg_resta_Transacciones  :=  neg_suma_Transacciones_Recividas-neg_suma_Transacciones_Enviadas]
@@ -457,8 +457,8 @@ AgregarVariables  <- function( dataset )
   
   dataset[ , neg_Indice_duedaInversion       := neg_suma_inversion/neg_suma_dueda]
   dataset[ , neg_resta_duedaInversion       := neg_suma_inversion-neg_suma_dueda]
-  dataset[ , neg_Indice_duedaInversion_max       := neg_max_inversion/neg_max_dueda]
-  dataset[ , neg_Indice_duedaInversion_min       := neg_min_inversion/neg_min_dueda]
+  dataset[ , neg_Indice_duedaInversion_max       := neg_max_inversion/neg_max_deuda]
+  dataset[ , neg_Indice_duedaInversion_min       := neg_min_inversion/neg_min_deuda]
   
   #### Activos ####
   
