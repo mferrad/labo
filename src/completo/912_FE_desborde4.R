@@ -1029,112 +1029,6 @@ exp_iniciar( )
 nom_arch  <- exp_nombre_archivo( PARAM$files$input$dentrada )
 dataset   <- fread( nom_arch )
 
-############## ACA agrego las features por fuerza bruta ###################
-
-#require("stringr")
-#dataset2   <- data.frame(fread( nom_arch ))
-
-#### Me creo un data frame con los valores que quiero analizar ########
-
-#variablesTarget=(read.table("~/buckets/b1/datasets/variablesTarget.txt"))
-#colnames(variablesTarget)="feature"
-
-#print(variablesTarget)
-#print(names(dataset2))
-
-### Creo la combinacion de variables ####
-#dataset1Mod=fuerzaBruta( dataset2 , variablesTarget )
-
-### Limpio los datos y creo el archivo de salida #####
-#dataset=LimpiarDataset( data.table(dataset1Mod))
-
-
-############ Fin de mi codigo #################################
-
-
-
-#ordeno el dataset por <numero_de_cliente, foto_mes> para poder hacer lags
-setorderv( dataset, PARAM$const$campos_sort )
-
-AgregarMes( dataset )  #agrego el mes del año
-
-if( PARAM$dummiesNA )  DummiesNA( dataset )  #esta linea debe ir ANTES de Corregir  !!
-
-if( PARAM$corregir )  Corregir( dataset )  #esta linea debe ir DESPUES de  DummiesNA
-
-if( PARAM$variablesmanuales )  AgregarVariables( dataset )
-
-
-#--------------------------------------
-#Esta primera parte es muuuy  artesanal  y discutible  ya que hay multiples formas de hacerlo
-
-cols_lagueables  <- copy( setdiff( colnames(dataset), PARAM$const$campos_fijos ) )
-
-if( PARAM$tendenciaYmuchomas$correr ) 
-{
-  p  <- PARAM$tendenciaYmuchomas
-
-  TendenciaYmuchomas( dataset, 
-                      cols= cols_lagueables,
-                      ventana=   p$ventana,
-                      tendencia= p$tendencia,
-                      minimo=    p$minimo,
-                      maximo=    p$maximo,
-                      promedio=  p$promedio,
-                      ratioavg=  p$ratioavg,
-                      ratiomax=  p$ratiomax
-                    )
-  
-  ########### AGrego esto para comparar con una ventana mas chica ################
-  
-  p  <- PARAM$tendenciaYmuchomas
-  
-  TendenciaYmuchomas( dataset, 
-                      cols= cols_lagueables,
-                      ventana=   5,
-                      tendencia= p$tendencia,
-                      minimo=    p$minimo,
-                      maximo=    p$maximo,
-                      promedio=  p$promedio,
-                      ratioavg=  p$ratioavg,
-                      ratiomax=  p$ratiomax
-  )
-  
-  p  <- PARAM$tendenciaYmuchomas
-  
-  TendenciaYmuchomas( dataset, 
-                      cols= cols_lagueables,
-                      ventana=   2,
-                      tendencia= p$tendencia,
-                      minimo=    p$minimo,
-                      maximo=    p$maximo,
-                      promedio=  p$promedio,
-                      ratioavg=  p$ratioavg,
-                      ratiomax=  p$ratiomax
-  )
-  
-  
-
-  ################## Fin del cambio ########################################
-  
-}
-
-
-for( i in 1:length( PARAM$lag ) )
-{
-  if( PARAM$lag[i] )
-  {
-    #veo si tengo que ir agregando variables
-    if( PARAM$acumulavars )  cols_lagueables  <- setdiff( colnames(dataset), PARAM$const$campos_fijos )
-
-    cols_lagueables  <- intersect( colnames(dataset), cols_lagueables )
-    Lags( cols_lagueables, i, PARAM$delta[ i ] )   #calculo los lags de orden  i
-
-    #elimino las variables poco importantes, para hacer lugar a las importantes
-    if( PARAM$canaritosratio[ i ] > 0 )  CanaritosImportancia( canaritos_ratio= unlist(PARAM$canaritosratio[ i ]) )
-  }
-}
-
 
 ################### Agrego los arboles de canaritos ##############################
 
@@ -1336,6 +1230,120 @@ print(dataset[foto_mes==202001])
 
 
 ###################################Fin Funcion canaritos ##################################################
+
+
+
+
+
+
+
+############## ACA agrego las features por fuerza bruta ###################
+
+#require("stringr")
+#dataset2   <- data.frame(fread( nom_arch ))
+
+#### Me creo un data frame con los valores que quiero analizar ########
+
+#variablesTarget=(read.table("~/buckets/b1/datasets/variablesTarget.txt"))
+#colnames(variablesTarget)="feature"
+
+#print(variablesTarget)
+#print(names(dataset2))
+
+### Creo la combinacion de variables ####
+#dataset1Mod=fuerzaBruta( dataset2 , variablesTarget )
+
+### Limpio los datos y creo el archivo de salida #####
+#dataset=LimpiarDataset( data.table(dataset1Mod))
+
+
+############ Fin de mi codigo #################################
+
+
+
+#ordeno el dataset por <numero_de_cliente, foto_mes> para poder hacer lags
+setorderv( dataset, PARAM$const$campos_sort )
+
+AgregarMes( dataset )  #agrego el mes del año
+
+if( PARAM$dummiesNA )  DummiesNA( dataset )  #esta linea debe ir ANTES de Corregir  !!
+
+if( PARAM$corregir )  Corregir( dataset )  #esta linea debe ir DESPUES de  DummiesNA
+
+if( PARAM$variablesmanuales )  AgregarVariables( dataset )
+
+
+#--------------------------------------
+#Esta primera parte es muuuy  artesanal  y discutible  ya que hay multiples formas de hacerlo
+
+cols_lagueables  <- copy( setdiff( colnames(dataset), PARAM$const$campos_fijos ) )
+
+if( PARAM$tendenciaYmuchomas$correr ) 
+{
+  p  <- PARAM$tendenciaYmuchomas
+
+  TendenciaYmuchomas( dataset, 
+                      cols= cols_lagueables,
+                      ventana=   p$ventana,
+                      tendencia= p$tendencia,
+                      minimo=    p$minimo,
+                      maximo=    p$maximo,
+                      promedio=  p$promedio,
+                      ratioavg=  p$ratioavg,
+                      ratiomax=  p$ratiomax
+                    )
+  
+  ########### AGrego esto para comparar con una ventana mas chica ################
+  
+  p  <- PARAM$tendenciaYmuchomas
+  
+  TendenciaYmuchomas( dataset, 
+                      cols= cols_lagueables,
+                      ventana=   5,
+                      tendencia= p$tendencia,
+                      minimo=    p$minimo,
+                      maximo=    p$maximo,
+                      promedio=  p$promedio,
+                      ratioavg=  p$ratioavg,
+                      ratiomax=  p$ratiomax
+  )
+  
+  p  <- PARAM$tendenciaYmuchomas
+  
+  TendenciaYmuchomas( dataset, 
+                      cols= cols_lagueables,
+                      ventana=   2,
+                      tendencia= p$tendencia,
+                      minimo=    p$minimo,
+                      maximo=    p$maximo,
+                      promedio=  p$promedio,
+                      ratioavg=  p$ratioavg,
+                      ratiomax=  p$ratiomax
+  )
+  
+  
+
+  ################## Fin del cambio ########################################
+  
+}
+
+
+for( i in 1:length( PARAM$lag ) )
+{
+  if( PARAM$lag[i] )
+  {
+    #veo si tengo que ir agregando variables
+    if( PARAM$acumulavars )  cols_lagueables  <- setdiff( colnames(dataset), PARAM$const$campos_fijos )
+
+    cols_lagueables  <- intersect( colnames(dataset), cols_lagueables )
+    Lags( cols_lagueables, i, PARAM$delta[ i ] )   #calculo los lags de orden  i
+
+    #elimino las variables poco importantes, para hacer lugar a las importantes
+    if( PARAM$canaritosratio[ i ] > 0 )  CanaritosImportancia( canaritos_ratio= unlist(PARAM$canaritosratio[ i ]) )
+  }
+}
+
+
 
 #dejo la clase como ultimo campo
 nuevo_orden  <- c( setdiff( colnames( dataset ) , PARAM$const$clase ) , PARAM$const$clase )
