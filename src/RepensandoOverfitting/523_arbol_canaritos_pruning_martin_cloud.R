@@ -15,6 +15,10 @@ library("rpart.plot")
 arbolesCanaritos  <- function( dtrain,dapply,pesos,labels)
 {
   
+  #ordeno para que queden en orden BAJA+1, BAJA+2, CONTINUA
+  #The order of the loss matrix depends on the order of your factor variable in R
+  setorder( dtrain, clase_ternaria )
+  
   campos_originales  <- copy( colnames( dtrain ) )
   NumeroCanaritos=round(length(names(dtrain))*0.2)
   
@@ -86,16 +90,26 @@ arbolesCanaritos  <- function( dtrain,dapply,pesos,labels)
 
 
 #setwd( "D:\\gdrive\\ITBA2022A\\" )  #establezco la carpeta donde voy a trabajar
-setwd("C:\\Users\\Martin\\Desktop\\MineriaDeDatos\\")  
+#setwd("C:\\Users\\Martin\\Desktop\\MineriaDeDatos\\")  
+setwd("~/buckets/b1/")   #Establezco el Working Directory
+
+dataset  <- fread("./datasets/paquete_premium.csv.gz", stringsAsFactors= TRUE)
+
+
 
 #cargo el dataset
-dtrain  <- fread( "./datasets/paquete_premium_202011.csv")
+#dtrain  <- fread( "./datasets/paquete_premium_202011.csv")
+dtrain=dataset[foto_mes==202011]
+
+
+
 #ordeno para que queden en orden BAJA+1, BAJA+2, CONTINUA
 #The order of the loss matrix depends on the order of your factor variable in R
 setorder( dtrain, clase_ternaria )
 
 #cargo donde voy a aplicar el modelo
-dapply  <- fread( "./datasets/paquete_premium_202101.csv")
+#dapply  <- fread( "./datasets/paquete_premium_202101.csv")
+dapply=dataset[foto_mes==202101]
 
 #uso esta semilla para los canaritos
 set.seed(10219)
@@ -125,4 +139,18 @@ setwd("C:\\Users\\Martin\\Desktop\\MineriaDeDatos\\labo\\exp\\KA5230\\")
 fwrite( entrega, 
         file= "stopping_at_canaritos.csv",
         sep= "," ) 
+
+
+
+
+
+
+
+#cargo el dataset donde voy a entrenar
+
+#cargo donde voy a aplicar el modelo
+
+
+
+#dapply  <- fread( "./datasets/paquete_premium_202101.csv")
 
