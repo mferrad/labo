@@ -19,6 +19,10 @@ arbolesCanaritos  <- function( dtrain,dapply,pesos,labels)
   #The order of the loss matrix depends on the order of your factor variable in R
   setorder( dtrain, clase_ternaria )
   
+  if(class(dtrain$clase_ternaria)=="factor")
+    dtrain$clase_ternaria=as.character(dtrain$clase_ternaria)
+  
+  
   campos_originales  <- copy( colnames( dtrain ) )
   NumeroCanaritos=round(length(names(dtrain))*0.2)
   
