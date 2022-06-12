@@ -7,10 +7,10 @@ googlecloud:
 
 
 experiment:
-  script: "src/completo/z931_HT_lightgbm.r"	
+  script: "src/completo/z931_HT_lightgbm.r"
   restart: TRUE
   name: "exp"
-  requires:   [ "TS8210MartinCanaritos" ]		#Martin: Cambio al nombre del experimento anterior
+  requires:   [ "TS8210" ]
 
 
 param:
@@ -31,7 +31,7 @@ param:
 
     learning_rate:      [ 0.02, 0.3]
     feature_fraction:   [ 0.1, 1.0 ]
-    num_leaves:         [ 1000, 4000, "integer" ]		#Martin: Cambie num leaves de 1024 a 2048
+    num_leaves:         [ 16, 1024, "integer" ]
     min_data_in_leaf:   [  0, 8000, "integer" ]
 
     lambda_l1:  0                    # [ 0  ,  10]
@@ -66,7 +66,7 @@ param:
 
   #Optimizacion Bayesiana
   BO:
-    iterations: 50             #Martin: pongo 50 iteraciones nomas
+    iterations: 100             #cantidad de iteraciones
 
     noisy: TRUE
     minimize: FALSE
