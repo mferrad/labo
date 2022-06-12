@@ -122,6 +122,7 @@ labels=pesos
 for(i in 1:length(pesos))
 {
   labels[i]=paste0("probCan",as.character(pesos[i]))
+  dataset[ , paste0( labels[i], "") := 0  ]
 }
   
 datasetFinal=arbolesCanaritos(dtrain,dapply,pesos,labels)
