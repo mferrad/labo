@@ -1139,24 +1139,6 @@ dataset   <- fread( nom_arch )
 ############ Fin de mi codigo #################################
 
 
-
-#ordeno el dataset por <numero_de_cliente, foto_mes> para poder hacer lags
-setorderv( dataset, PARAM$const$campos_sort )
-
-AgregarMes( dataset )  #agrego el mes del año
-
-if( PARAM$dummiesNA )  DummiesNA( dataset )  #esta linea debe ir ANTES de Corregir  !!
-
-if( PARAM$corregir )  Corregir( dataset )  #esta linea debe ir DESPUES de  DummiesNA
-
-if( PARAM$variablesmanuales )  AgregarVariables( dataset )
-
-
-
-
-
-
-
 ################### Agrego los arboles de canaritos ##############################
 
 
@@ -1425,23 +1407,16 @@ dataset[foto_mes==201906,probCan400:=arbolesCanaritos(dtrain,dapply,peso=400)]
 ###################################Fin Funcion canaritos ##################################################
 
 
+#ordeno el dataset por <numero_de_cliente, foto_mes> para poder hacer lags
+setorderv( dataset, PARAM$const$campos_sort )
 
+AgregarMes( dataset )  #agrego el mes del año
 
+if( PARAM$dummiesNA )  DummiesNA( dataset )  #esta linea debe ir ANTES de Corregir  !!
 
+if( PARAM$corregir )  Corregir( dataset )  #esta linea debe ir DESPUES de  DummiesNA
 
-
-
-
-
-
-
-
-
-
-
-
-
-
+if( PARAM$variablesmanuales )  AgregarVariables( dataset )
 
 
 #--------------------------------------
