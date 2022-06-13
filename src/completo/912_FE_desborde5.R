@@ -1157,6 +1157,8 @@ dataset[foto_mes==202101,probCan1:=arbolesCanaritos(dtrain,dapply,peso=1)]
 dataset[foto_mes==202101,probCan59:=arbolesCanaritos(dtrain,dapply,peso=59)]
 dataset[foto_mes==202101,probCan400:=arbolesCanaritos(dtrain,dapply,peso=400)]
 
+print(dataset[foto_mes==202101])
+
 #### Fin de Enero 2021 #####
 
 
@@ -1169,6 +1171,8 @@ dapply=datasetAux[foto_mes==202012]
 dataset[foto_mes==202012,probCan1:=arbolesCanaritos(dtrain,dapply,peso=1)]
 dataset[foto_mes==202012,probCan59:=arbolesCanaritos(dtrain,dapply,peso=59)]
 dataset[foto_mes==202012,probCan400:=arbolesCanaritos(dtrain,dapply,peso=400)]
+
+print(dataset[foto_mes==202012])
 
 #### Fin de Diciembre 2020 #####
 
@@ -1183,6 +1187,8 @@ dataset[foto_mes==202011,probCan1:=arbolesCanaritos(dtrain,dapply,peso=1)]
 dataset[foto_mes==202011,probCan59:=arbolesCanaritos(dtrain,dapply,peso=59)]
 dataset[foto_mes==202011,probCan400:=arbolesCanaritos(dtrain,dapply,peso=400)]
 
+print(dataset[foto_mes==202011])
+
 #### Fin de Noviembre 2020 #####
 
 #### Agrego la probabilidad de darse de baja a Octubre 2020 #####
@@ -1194,6 +1200,8 @@ dapply=datasetAux[foto_mes==202010]
 dataset[foto_mes==202010,probCan1:=arbolesCanaritos(dtrain,dapply,peso=1)]
 dataset[foto_mes==202010,probCan59:=arbolesCanaritos(dtrain,dapply,peso=59)]
 dataset[foto_mes==202010,probCan400:=arbolesCanaritos(dtrain,dapply,peso=400)]
+
+print(dataset[foto_mes==202010])
 
 #### Fin de Octubre 2020 #####
 
@@ -1208,6 +1216,7 @@ dataset[foto_mes==202009,probCan1:=arbolesCanaritos(dtrain,dapply,peso=1)]
 dataset[foto_mes==202009,probCan59:=arbolesCanaritos(dtrain,dapply,peso=59)]
 dataset[foto_mes==202009,probCan400:=arbolesCanaritos(dtrain,dapply,peso=400)]
 
+print(dataset[foto_mes==202009])
 
 #### Fin de Sept 2020 #####
 
@@ -1223,6 +1232,8 @@ dataset[foto_mes==202008,probCan1:=arbolesCanaritos(dtrain,dapply,peso=1)]
 dataset[foto_mes==202008,probCan59:=arbolesCanaritos(dtrain,dapply,peso=59)]
 dataset[foto_mes==202008,probCan400:=arbolesCanaritos(dtrain,dapply,peso=400)]
 
+print(dataset[foto_mes==202008])
+
 #### Fin de Agosto 2020 #####
 
 
@@ -1236,6 +1247,8 @@ dapply=datasetAux[foto_mes==202007]
 dataset[foto_mes==202007,probCan1:=arbolesCanaritos(dtrain,dapply,peso=1)]
 dataset[foto_mes==202007,probCan59:=arbolesCanaritos(dtrain,dapply,peso=59)]
 dataset[foto_mes==202007,probCan400:=arbolesCanaritos(dtrain,dapply,peso=400)]
+
+print(dataset[foto_mes==202007])
 
 #### Fin de Julio 2020 #####
 
@@ -1252,6 +1265,8 @@ dataset[foto_mes==202005,probCan1:=arbolesCanaritos(dtrain,dapply,peso=1)]
 dataset[foto_mes==202005,probCan59:=arbolesCanaritos(dtrain,dapply,peso=59)]
 dataset[foto_mes==202005,probCan400:=arbolesCanaritos(dtrain,dapply,peso=400)]
 
+print(dataset[foto_mes==202005])
+
 #### Fin de Mayo 2020 #####
 
 
@@ -1265,6 +1280,7 @@ dataset[foto_mes==202004,probCan1:=arbolesCanaritos(dtrain,dapply,peso=1)]
 dataset[foto_mes==202004,probCan59:=arbolesCanaritos(dtrain,dapply,peso=59)]
 dataset[foto_mes==202004,probCan400:=arbolesCanaritos(dtrain,dapply,peso=400)]
 
+print(dataset[foto_mes==202004])
 
 #### Fin de Abril 2020 #####
 
@@ -1279,6 +1295,8 @@ dataset[foto_mes==202003,probCan1:=arbolesCanaritos(dtrain,dapply,peso=1)]
 dataset[foto_mes==202003,probCan59:=arbolesCanaritos(dtrain,dapply,peso=59)]
 dataset[foto_mes==202003,probCan400:=arbolesCanaritos(dtrain,dapply,peso=400)]
 
+print(dataset[foto_mes==202003])
+
 #### Fin de Marzo 2020 #####
 
 #### Agrego la probabilidad de darse de baja a  Febrero 2020 #####
@@ -1291,6 +1309,7 @@ dataset[foto_mes==202002,probCan1:=arbolesCanaritos(dtrain,dapply,peso=1)]
 dataset[foto_mes==202002,probCan59:=arbolesCanaritos(dtrain,dapply,peso=59)]
 dataset[foto_mes==202002,probCan400:=arbolesCanaritos(dtrain,dapply,peso=400)]
 
+print(dataset[foto_mes==202002])
 
 #### Fin de Febrero 2020 #####
 
@@ -1305,6 +1324,8 @@ dataset[foto_mes==202001,probCan1:=arbolesCanaritos(dtrain,dapply,peso=1)]
 dataset[foto_mes==202001,probCan59:=arbolesCanaritos(dtrain,dapply,peso=59)]
 dataset[foto_mes==202001,probCan400:=arbolesCanaritos(dtrain,dapply,peso=400)]
 
+print(dataset[foto_mes==202001])
+
 #### Fin de Enero 2020 #####
 
 
@@ -1318,6 +1339,7 @@ dataset[foto_mes==201912,probCan1:=arbolesCanaritos(dtrain,dapply,peso=1)]
 dataset[foto_mes==201912,probCan59:=arbolesCanaritos(dtrain,dapply,peso=59)]
 dataset[foto_mes==201912,probCan400:=arbolesCanaritos(dtrain,dapply,peso=400)]
 
+print(dataset[foto_mes==201912])
 
 #### Fin de Dec 2019 #####
 
@@ -1331,9 +1353,11 @@ dataset[foto_mes==201911,probCan1:=arbolesCanaritos(dtrain,dapply,peso=1)]
 dataset[foto_mes==201911,probCan59:=arbolesCanaritos(dtrain,dapply,peso=59)]
 dataset[foto_mes==201911,probCan400:=arbolesCanaritos(dtrain,dapply,peso=400)]
 
-datasetAux=NULL
+print(dataset[foto_mes==201911])
 
-print("Fin canarios")
+
+
+
 
 #### Fin de Nov 2019 #####
 
@@ -1349,6 +1373,7 @@ dataset[foto_mes==201910,probCan1:=arbolesCanaritos(dtrain,dapply,peso=1)]
 dataset[foto_mes==201910,probCan59:=arbolesCanaritos(dtrain,dapply,peso=59)]
 dataset[foto_mes==201910,probCan400:=arbolesCanaritos(dtrain,dapply,peso=400)]
 
+print(dataset[foto_mes==201910])
 
 #### Fin de sept 2019 #####
 
@@ -1362,6 +1387,7 @@ dataset[foto_mes==201909,probCan1:=arbolesCanaritos(dtrain,dapply,peso=1)]
 dataset[foto_mes==201909,probCan59:=arbolesCanaritos(dtrain,dapply,peso=59)]
 dataset[foto_mes==201909,probCan400:=arbolesCanaritos(dtrain,dapply,peso=400)]
 
+print(dataset[foto_mes==201909])
 
 #### Fin de sept 2019 #####
 
@@ -1376,6 +1402,7 @@ dataset[foto_mes==201908,probCan1:=arbolesCanaritos(dtrain,dapply,peso=1)]
 dataset[foto_mes==201908,probCan59:=arbolesCanaritos(dtrain,dapply,peso=59)]
 dataset[foto_mes==201908,probCan400:=arbolesCanaritos(dtrain,dapply,peso=400)]
 
+print(dataset[foto_mes==201908])
 
 #### Fin de aug 2019 #####
 
@@ -1391,6 +1418,8 @@ dataset[foto_mes==201907,probCan59:=arbolesCanaritos(dtrain,dapply,peso=59)]
 dataset[foto_mes==201907,probCan400:=arbolesCanaritos(dtrain,dapply,peso=400)]
 
 
+print(dataset[foto_mes==201907])
+
 #### Fin de Jul 2019 #####
 
 
@@ -1405,6 +1434,10 @@ dataset[foto_mes==201906,probCan1:=arbolesCanaritos(dtrain,dapply,peso=1)]
 dataset[foto_mes==201906,probCan59:=arbolesCanaritos(dtrain,dapply,peso=59)]
 dataset[foto_mes==201906,probCan400:=arbolesCanaritos(dtrain,dapply,peso=400)]
 
+print(dataset[foto_mes==201906])
+
+print("Fin canarios")
+datasetAux=NULL
 
 #### Fin de jun 2019 #####
 
