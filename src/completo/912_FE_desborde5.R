@@ -1150,6 +1150,7 @@ datasetAux=data.table(dataset)
 dtrain=datasetAux[foto_mes==202011]
 setorder( dtrain, clase_ternaria )
 dapply=datasetAux[foto_mes==202101]
+print("Empieza canarios")
 
 
 dataset[foto_mes==202101,probCan1:=arbolesCanaritos(dtrain,dapply,peso=1)]
@@ -1330,6 +1331,9 @@ dataset[foto_mes==201911,probCan1:=arbolesCanaritos(dtrain,dapply,peso=1)]
 dataset[foto_mes==201911,probCan59:=arbolesCanaritos(dtrain,dapply,peso=59)]
 dataset[foto_mes==201911,probCan400:=arbolesCanaritos(dtrain,dapply,peso=400)]
 
+datasetAux=NULL
+
+print("Fin canarios")
 
 #### Fin de Nov 2019 #####
 
