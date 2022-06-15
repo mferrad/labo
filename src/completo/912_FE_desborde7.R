@@ -1075,7 +1075,7 @@ arbolesCanaritos  <- function( dtrain,dapply,peso)
   
   prediccion  <- predict( modelo_pruned, dapply1, type = "prob")[,"BAJA+2"]
   
-  return(rank(prediccion))
+  return(rank(prediccion,ties.method= "random"))
   
 }
 
