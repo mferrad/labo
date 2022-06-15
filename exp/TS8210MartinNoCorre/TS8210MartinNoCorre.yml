@@ -30,7 +30,7 @@ param:
       desde:  202001
       hasta:  202009	
     excluir: [ 202006 ]
-    undersampling: [{clase: "CONTINUA", prob: 0.2 } ]  #ATENCION  Martin: Agrego undersampling de 0.6
+    undersampling: [ ]  #ATENCION  Martin: Agrego undersampling de 0.6
 
   #donde valido
   validate:
