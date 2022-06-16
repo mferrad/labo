@@ -24,7 +24,7 @@ param:
   tendenciaYmuchomas: 
     correr: TRUE #Great power comes with great responsability
     ventana: 6
-    tendencia: TRUE		#Martin: Lo cambio a false en principio
+    tendencia: TRUE		#Martin: Lo cambio a false en principio jk
     minimo:    FALSE
     maximo:    TRUE
     promedio:  FALSE		#Martin: Lo cambio a false en principio
