@@ -1,0 +1,11 @@
+probCan1
+probCan59
+probCan400
+div_foto_mes_Visa_status
+Master_status_ratioavg6
+Visa_status_ratioavg6
+probCan400_max6
+mv_status01_ratioavg6
+mv_status02_ratioavg6
+max_Master_status_Visa_status_ratioavg6
+min_Master_status_Visa_status_ratioavg6
