@@ -10,10 +10,10 @@ googlecloud:
 
 
 experiment:
-  script: "src/completo/999_ZZ_lightgbm_semillerio.r"
+  script: "src/completo/z999_ZZ_lightgbm_semillerio.r"
   restart: TRUE
   name: "exp"
-  requires:   [ "HT8310MartinSimple" ]
+  requires:   [ "HT8310" ]
 
 param:
   semilla_primos:  102191 #poner aqui una semilla propia, sirve para crear los numeros primos que seran semillas

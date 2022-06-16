@@ -5,7 +5,7 @@ googlecloud:
 
 
 experiment:
-  script: "src/completo/912_FE_desborde8.R"
+  script: "src/completo/912_FE_desborde10.R"	#Martin: aca cambio el nombre al archivo sin la Z
   restart: FALSE
   name: "exp"
   requires: [ "DT0001" ]
@@ -17,25 +17,25 @@ param:
   corregir: TRUE    #se se corrige los campos/foto_mes  MALOS
   variablesdrift: [] #variables que se eliminan porque estan mal en el futuro
   
-  variablesmanuales: FALSE
+  variablesmanuales: TRUE	#Martin Activo variables Manuales	
 
-  acumulavars: FALSE   #a lo nuevo lo va aplicando
+  acumulavars: FALSE   #Martin: dejo que aplique a las variables nuevas
 
   tendenciaYmuchomas: 
     correr: TRUE #Great power comes with great responsability
     ventana: 6
-    tendencia: TRUE
+    tendencia: TRUE		#Martin: Lo cambio a false en principio
     minimo:    FALSE
-    maximo:    FALSE
-    promedio:  TRUE
-    ratioavg:  FALSE
-    ratiomax:  FALSE
+    maximo:    TRUE
+    promedio:  FALSE		#Martin: Lo cambio a false en principio
+    ratioavg:  TRUE
+    ratiomax:  FALSE		
 
 
   #lags y sus deltas , 6 posiciones
-  lag:   [ TRUE, FALSE, FALSE, FALSE, FALSE, FALSE ]
-  delta: [ TRUE, FALSE, FALSE, FALSE, FALSE, FALSE ]
-  canaritosratio: [ 0, 0, 0, 0, 0, 0 ]
+  lag:   [ FALSE, FALSE, FALSE, FALSE, FALSE, TRUE ]	#Martin: Cambio a TRUE para las pruebas
+  delta: [ FALSE, FALSE, FALSE, FALSE, FALSE, TRUE ]	#Martin: Cambio a False en principio (el primero)
+  canaritosratio: [ 0, 0, 0, 0, 0, 0.2 ]	#Martin: Pongo todo los ratios de canaritos en 0.2
 
   tony:  FALSE
 
@@ -44,7 +44,7 @@ param:
     input:
       dentrada: [ "dataset" ]
     output:
-      dsalida: "paquete_premium_ext.csv.gz"
+      dsalida: "paquete_premium_ext.csv.gz"	
 
   const:
     clase: "clase_ternaria"

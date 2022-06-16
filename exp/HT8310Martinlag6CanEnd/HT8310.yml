@@ -7,10 +7,10 @@ googlecloud:
 
 
 experiment:
-  script: "src/completo/931_HT_lightgbm.r"
+  script: "src/completo/z931_HT_lightgbm.r"
   restart: TRUE
   name: "exp"
-  requires:   [ "TS8210MartinSimple" ]
+  requires:   [ "TS8210" ]
 
 
 param:

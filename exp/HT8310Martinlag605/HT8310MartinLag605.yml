@@ -7,10 +7,10 @@ googlecloud:
 
 
 experiment:
-  script: "src/completo/931_HT_lightgbm.r"
+  script: "src/completo/z931_HT_lightgbm.r"	
   restart: TRUE
   name: "exp"
-  requires:   [ "TS8210MartinSimple" ]
+  requires:   [ "TS8210MartinLag605" ]		#Martin: Cambio al nombre del experimento anterior
 
 
 param:
@@ -29,10 +29,10 @@ param:
  #los parametros que son un solo valor  NO van a la B.O. y se pasan fijos
   lightgbm:
 
-    learning_rate:      [ 0.02, 0.3]
-    feature_fraction:   [ 0.1, 1.0 ]
-    num_leaves:         [ 16, 1024, "integer" ]
-    min_data_in_leaf:   [  0, 8000, "integer" ]
+    learning_rate:      [ 0.02, 0.1]				#Martin: Cambie esto de 0.3 a 0.1
+    feature_fraction:   [ 0.5, 1 ]				
+    num_leaves:         [ 1000, 9000, "integer" ]		#Martin: Cambie num leaves de 1024 a 4500 con min de 1000
+    min_data_in_leaf:   [  100, 8000, "integer" ]
 
     lambda_l1:  0                    # [ 0  ,  10]
     lambda_l2:  0                    # [ 0  , 200]
@@ -66,7 +66,7 @@ param:
 
   #Optimizacion Bayesiana
   BO:
-    iterations: 100             #cantidad de iteraciones
+    iterations: 100             #Martin: pongo 50 iteraciones nomas
 
     noisy: TRUE
     minimize: FALSE

@@ -5,10 +5,10 @@ googlecloud:
 
 
 experiment:
-  script: "src/completo/921_TS_generico.r"
+  script: "src/completo/z921_TS_generico.r"	
   restart: FALSE
   name: "exp"
-  requires: [ "FE8120MartinSimple" ]
+  requires: [ "FE8120MartinLag6CanEnd" ] #Martin: Aca cambio y apunto al experimento anterior
 
 
 param:
@@ -25,12 +25,12 @@ param:
 
   #donde entreno
   train:
-    periodos: [ ]
+    periodos: [ ] 	
     rango:
       desde:  202001
-      hasta:  202009
+      hasta:  202009	
     excluir: [ 202006 ]
-    undersampling: [ ]  #ATENCION  sin undersampling
+    undersampling: [{clase: "CONTINUA", prob: 0.2 } ]  #ATENCION  Martin: Agrego undersampling de 0.6
 
   #donde valido
   validate:
