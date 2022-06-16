@@ -17,7 +17,7 @@ param:
   corregir: TRUE    #se se corrige los campos/foto_mes  MALOS
   variablesdrift: [] #variables que se eliminan porque estan mal en el futuro
   
-  variablesmanuales: TRUE	#Martin Activo variables Manuales	
+  variablesmanuales: TRUE	#Martin Activo variables Manuales	ulh
 
   acumulavars: FALSE   #Martin: dejo que aplique a las variables nuevas
 
