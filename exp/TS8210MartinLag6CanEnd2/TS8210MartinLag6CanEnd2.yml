@@ -8,7 +8,7 @@ experiment:
   script: "src/completo/z921_TS_generico.r"	
   restart: FALSE
   name: "exp"
-  requires: [ "FE8120MartinLag6CanEnd" ] #Martin: Aca cambio y apunto al experimento anterior
+  requires: [ "FE8120MartinLag6CanEnd2" ] #Martin: Aca cambio y apunto al experimento anterior
 
 
 param:
